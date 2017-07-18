@@ -1,2 +1,4 @@
 # ibpsa2017.github.io
-for http://www.ibpsa.org/ and buildingsimulation2017.org
+for material related to http://www.ibpsa.org/ and https://buildingsimulation2017.org
+
+unofficial site created by by and for conference attendees
