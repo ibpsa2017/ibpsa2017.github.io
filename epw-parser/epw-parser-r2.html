@@ -81,7 +81,8 @@ renderer.sortObjects = false;
 
 		window.addEventListener( 'resize', onWindowResize, false );
 
-		window.addEventListener( 'mousemove', onMouseMove, false );
+		renderer.domElement.addEventListener( 'mousemove', onMouseMove, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
 		let axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
@@ -222,6 +223,17 @@ renderer.sortObjects = false;
 
 	}
 
+
+	function onDocumentTouchStart( event ) {
+
+//				event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		onDocumentMouseMove( event );
+
+	}
 
 	function onMouseMove( event ) {
 
