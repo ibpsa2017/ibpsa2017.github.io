@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = 'Basic HTML template' >
+<meta name = keywords content='JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name = date content='2017-08-01' >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; }
+	a { color: crimson; text-decoration: none; }
+
+	#contents { z-index: 10; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
+		<div id = "contents" ></div>
+	</div>
+
+<script>
+
+	url = 'https://api.github.com/orgs/ladybug-tools/repos';
+
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+//		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		requestFile( url );
+
+	}
+
+	function requestFile( fileName ) {
+
+//		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', fileName, true );
+		xhr.onerror = function( xhr ) { console.log( 'error', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'items', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function callback( xhr ) {
+
+			let response, json, txt;
+
+			response = xhr.target.response;
+
+			json = JSON.parse( response );
+console.log( 'text', json );
+			txt = '';
+
+			for ( repo of json ) {
+
+				txt += '<p><a href="#https://rawgit.com/ladybug-tools/' + repo.name + '/gh-pages/README.md" >' + repo.name + '</a>' + b;
+
+			}
+
+			parent.menuBody.innerHTML = txt
+
+		}
+
+	}
+
+
+
+</script>
+</body>
+</html>

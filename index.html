@@ -187,7 +187,10 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			main.style.overflow = 'auto';
 
+			try {
 			requestFile( url, mainContents );
+
+			} catch( e ) { console.log( 'e', e ); }
 
 		} else if ( url.includes( '.html' ) ) {
 
@@ -264,6 +267,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'get', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error', xhr  ); };
 		xhr.onload = function() {
 
 			target.innerHTML = converter.makeHtml( xhr.responseText );
