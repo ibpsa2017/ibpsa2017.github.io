@@ -1,6 +1,6 @@
-### [Sponsor Links]( #menu-sponsor-links.md )
+### [Sponsor links]( #menu-sponsor-links.md "View all 40 sites in a minute or two" )
 
-### [All session info in single page]( #sessions-building-simulation-2017.html )
+### [All sessions info in a single page]( #sessions-building-simulation-2017.html "Speed your way to deciding what to see" )
 
-### [threejs-basic]( #threejs-basic.html ) [&#x1F5D7;]( threejs-basic.html )
+### [EPW Data Parser]( #epw-parser/README.md "A fun fail" ) [&#x1F5D7;]( epw-parser/epw-parser-r2.html )
 

@@ -23,5 +23,5 @@ You can have a glance at all forty sites in a minute or so. Instead of wasting t
 
 The separate window thing is a bit of a hassle, but it has everything to do with security and preventing malware and spoofing activity.
 
-
+The source for grabbing we used to capture the data is on GitHub
 
