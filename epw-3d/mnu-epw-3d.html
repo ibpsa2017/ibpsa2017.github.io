@@ -18,6 +18,9 @@
 <body>
 <script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
 
+<p id=epwContents >
+
+</p>
 <p>
 <button onclick="initSunPath();" >Draw Sun Path</button>
 </p>
@@ -39,7 +42,24 @@ Hour <output id=outHour for="inpHour" ></output>
 <button onclick="togglePlayTheYear();" >Play the Year</button>
 </p>
 
+<!--
+<p>
+Building height = dry bulb temperature<br>
+Ground emissivity = dew point temperature<br>
+Fog closeness = relative humidity<br>
+Sun intensity = Direct Normal Radiation<br>
+Arrow direction = wind direction<br>
+Arrow length = wind speed<br>
+
+</p>
+
+-->
+
 <script>
+
+	let fileName;
+//	fileName = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/data/SF_example_data.csv';
+	fileName = '../data/SF_example_data.csv';
 
 	var pmc;
 	var THREE;
@@ -48,15 +68,20 @@ Hour <output id=outHour for="inpHour" ></output>
 	var lightDirectional;
 	var cameraHelper;
 	var parameters;
+	var analemma;
 	var object3D;
+	var structures;
+	var ground;
 
 	var sun;
-	var analemma;
+//	var analemma;
 	var analemmaRadius;
 
 	let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
-	playTheYear = false;
+	let indexEPW;
+
+	let playTheYear = false;
 
 
 	init();
@@ -69,15 +94,37 @@ Hour <output id=outHour for="inpHour" ></output>
 
 		}
 
+		inpMonth.onclick = initSunPath;
+		inpDate.onclick = initSunPath;
+		inpHour.onclick = initSunPath;
 
-		inpMonth.onmousemove = initSunPath;
-		inpDate.onmousemove = initSunPath;
-		inpHour.onmousemove = initSunPath;
+		requestFile( fileName, callbackEPW );
+
+/*
+		parent.mainIframe.onload = function() { 
+
+console.log( '333',  parent.mainIframe.contentWindow.scene ); 
+
+			parent.mainIframe.contentWindow.addEventListener( 'load', function() { 
+
+console.log( '444', scene ); 
+
+
+			}, false );
+
+//				initSunPath();
+
+		};
+*/
+
+
 	}
 
 
 
 	function initSunPath() {
+
+		if ( !parent.mainIframe ) { parent.location = 'index.html'; return; }
 
 		pmc = parent.mainIframe.contentWindow;
 		THREE = pmc.THREE;
@@ -85,11 +132,18 @@ Hour <output id=outHour for="inpHour" ></output>
 		controls = pmc.controls;
 		lightDirectional = pmc.lightDirectional;
 		cameraHelper = pmc.cameraHelper;
+		structures = pmc.structures;
 		parameters = pmc.parameters;
 		object3D = pmc.object3D;
+		object3D.analemma = undefined;
 		lights = pmc.lights;
+		ground = pmc.ground;
+
+//		scene.fog = new THREE.FogExp2( 0xaaaaaa, 10 );
+//console.log( '', scene.fog );
 
 		analemmaRadius = 0.8 * pmc.groundSize;
+		parameters.offsetUTC = -420;
 
 		parameters.date = 21;
 		parameters.month = 2;
@@ -106,15 +160,25 @@ Hour <output id=outHour for="inpHour" ></output>
 		inpHour.value = parameters.hours + parameters.offsetUTC / 60;
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
 
+		if ( !analemma ) {
+
 		drawAnalemma();
 
 		initSunAndLight();
 
-		inpMonth.onmousemove = setMonth;
-		inpDate.onmousemove = setDate;
-		inpHour.onmousemove = setHour;
+		pointer = drawPointer3D();
+		pointer.position.set( 50, 10, 0 );
+		
+		scene.add( pointer );
 
+//console.log( '', pointer );
+
+		}
+		inpMonth.onclick = setMonth;
+		inpDate.onclick = setDate;
+		inpHour.onclick = setHour;
 	}
+
 
 
 	function drawAnalemma() {
@@ -127,7 +191,6 @@ Hour <output id=outHour for="inpHour" ></output>
 		colors = [ 'bisque', 'deeppink', 'sienna', 'darkorange', 'indigo', 'lime',
 		'purple', 'honeydew', 'coral', 'gold', 'gray', 'maroon' ];
 
-		
 
 		analemma = new THREE.Object3D();
 
@@ -249,12 +312,94 @@ Hour <output id=outHour for="inpHour" ></output>
 	}
 
 
+	function drawPointer3D() {
+
+		var geometry, material, mesh;
+
+		geometry = new THREE.CylinderGeometry( 10, 5, 80, 3 );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
+		geometry.merge( new THREE.CylinderGeometry( 12, 0, 20, 3 ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * pi ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( - pi ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -30 ) );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.5, transparent: true } );
+		mesh = new THREE.Mesh( geometry, material );
+mesh.scale.multiplyScalar( 0.25 );
+
+		return mesh;
+
+	}
+
+	function getEPW() {
+
+		let index;
+		const b = '<br>';
+
+		let p = parameters;
+		let dayCount = 0;
+
+
+		for ( let i = 0; i <  p.month; i++ ) {
+
+			dayCount += daysOfMonth[ i ];
+
+		}
+
+		indexEPW = p.hour + 24 * ( p.date + dayCount );
+
+		data = epw[ indexEPW ];
+
+		if ( !data ) { return; }
+
+		epwContents.innerHTML =
+
+			'<h3>Item: ' + indexEPW + '</h3>' +
+			'Date: ' + data[ 0 ] + b +
+			'Time: ' + data[ 1 ] + b +
+			'Dry Bulb Temperature {C}: ' + data[ 2 ] + b +
+			'Dew Point Temperature {C}: ' + data[ 3 ] + b +
+			'Relative Humidity {%}: ' + data[ 4 ] + b +
+			'Direct Normal Radiation {Wh/m2}: ' + b + data[ 5 ] + b +
+			'Wind Direction {deg}: ' + b + data[ 6 ] + b +
+			'Wind Speed {m/s}: ' + data[ 7 ] + b +
+
+		'';
+
+		updateScene();
+
+	}
+
+
+	function updateScene(){
+
+		let data = epw[ indexEPW ];
+
+		lightDirectional.intensity  = data[ 5 ] / 1000;
+
+//console.log( 'intensity', lightDirectional.intensity );
+
+		structures.scale.y = 0.01 + data[ 2 ] / 20;
+
+		scene.fog.far = 150 + parseInt( data[ 4 ], 10 );
+// console.log( '', scene.fog.far, data[ 4 ] );
+
+		c = parseInt( data[ 4 ], 10 ) / 220;
+		ground.material.emissive = new THREE.Color( c, c, c );
+
+		pointer.rotation.y = data[ 6 ] * Math.PI / 180;
+		pointer.scale.z = 0.0001 + 0.05 * data[ 7 ];
+//		pointer.geometry = pointer.geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 + 0.03 * data[ 7 ] ) );
+	}
+
+
+
 	function togglePlayTheYear() {
 
 		playTheYear = !playTheYear;
 		play();
 
 	}
+
 
 
 	function play() {
@@ -264,9 +409,11 @@ Hour <output id=outHour for="inpHour" ></output>
 
 	}
 
+
+
 	function goToNextHour() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
 		if ( !pmc ) { initSunPath(); }
 
 		thisHour = parseInt( inpHour.value, 10 );
@@ -306,6 +453,7 @@ Hour <output id=outHour for="inpHour" ></output>
 //console.log( '', parameters );
 
 		setSunPosition();
+		getEPW();
 
 	}
 
@@ -313,7 +461,7 @@ Hour <output id=outHour for="inpHour" ></output>
 
 	function setMonth() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
 		if ( !pmc ) { initSunPath(); }
 
 		parameters.month = parseInt( inpMonth.value, 10 );
@@ -321,6 +469,7 @@ Hour <output id=outHour for="inpHour" ></output>
 		outMonth.value = parameters.month + 1;
 
 		setSunPosition();
+		getEPW();
 
 // console.log( '', parent.mainIframe.contentWindow.parameters.month );
 
@@ -330,13 +479,13 @@ Hour <output id=outHour for="inpHour" ></output>
 
 	function setDate() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
 		if ( !pmc ) { initSunPath(); }
 
 		outDate.value = parameters.date = parseInt( inpDate.value, 10 );
 
 		setSunPosition();
-
+		getEPW();
 // console.log( '', parent.mainIframe.contentWindow.parameters.date );
 
 	}
@@ -345,13 +494,14 @@ Hour <output id=outHour for="inpHour" ></output>
 
 	function setHour() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
 		if ( !pmc ) { initSunPath(); }
 
 		parameters.hour = parseInt( inpHour.value - parameters.offsetUTC / 60, 10 );
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
 
 		setSunPosition();
+		getEPW();
 
 // console.log( '', parent.mainIframe.contentWindow.parameters.hours );
 
@@ -445,6 +595,41 @@ Hour <output id=outHour for="inpHour" ></output>
 
 	}
 
+
+
+
+	function requestFile( fileName, callback ) {
+
+		let xhr, response, data ;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', fileName, true );
+		xhr.onerror = function( xhr ) { console.log( 'error', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'xhr progress/ bytes loaded', xhr.loaded, xhr  ); }; /// or something
+		xhr.onload = callback ? callback : function( xhr ) { console.log( 'load complete', xhr  ); };
+		xhr.send( null );
+
+	}
+
+
+
+	function callbackEPW( xhr ) {
+
+		let response, lines;
+
+		response = xhr.target.response;
+
+		epw = response.split( '\n' ).map( function( line ) { return line.split( ',' ); } );
+
+//console.log( 'epw',epw );
+//console.log( 'length', epw.length );
+
+//			contents.innerHTML = '<textarea cols=60 rows= 50 >' + lines + '</textarea>';
+
+
+
+	}
 
 
 
