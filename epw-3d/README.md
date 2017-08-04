@@ -4,9 +4,10 @@
 EPW 3D Read Me
 ====
 
-<iframe src=epw-3d.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [EPW 3D ]( epw-3d.html )
+
+## Full Screen: [EPW 3D ]( https://ibpsa2017.github.io/epw-3d/index.html )
 
 
 ## Concept
