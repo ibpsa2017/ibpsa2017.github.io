@@ -1,5 +1,7 @@
 ## [EPW 3D]( index.html )
 
+Play back a year of weather statistics
+
 #### [README / home page]( #README.md )
 
 ***

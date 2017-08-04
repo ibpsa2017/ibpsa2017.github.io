@@ -119,7 +119,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 <script>
 
 
-	let projectName = '';
+	let projectName = 'ibpsa2017';
 
 
 	init();
@@ -131,7 +131,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		let p = arr.pop();
 
-		projectName = arr.pop();
+//		projectName = arr.pop();
 
 		showdown.setFlavor( 'github' );
 
@@ -268,7 +268,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			target.innerHTML = converter.makeHtml( xhr.responseText );
 
-			projectName = document.links[ 0 ].text;
+//			projectName = document.links[ 0 ].text;
 
 		};
 

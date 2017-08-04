@@ -39,21 +39,15 @@ Hour <output id=outHour for="inpHour" ></output>
 </p>
 
 <p>
-<button onclick="togglePlayTheYear();" >Play the Year</button>
+Click to start & stop:
+<button onclick="togglePlayTheYear();" >Play the Year</button> 
 </p>
 
-<!--
+
 <p>
-Building height = dry bulb temperature<br>
-Ground emissivity = dew point temperature<br>
-Fog closeness = relative humidity<br>
-Sun intensity = Direct Normal Radiation<br>
-Arrow direction = wind direction<br>
-Arrow length = wind speed<br>
-
+See read me for details
 </p>
 
--->
 
 <script>
 
@@ -68,13 +62,12 @@ Arrow length = wind speed<br>
 	var lightDirectional;
 	var cameraHelper;
 	var parameters;
-	var analemma;
 	var object3D;
 	var structures;
 	var ground;
 
 	var sun;
-//	var analemma;
+	var analemma;
 	var analemmaRadius;
 
 	let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
@@ -99,6 +92,9 @@ Arrow length = wind speed<br>
 		inpHour.onclick = initSunPath;
 
 		requestFile( fileName, callbackEPW );
+
+
+		window.addEventListener( 'close', function() { playTheYear = false; }, false );
 
 /*
 		parent.mainIframe.onload = function() { 
@@ -135,7 +131,6 @@ console.log( '444', scene );
 		structures = pmc.structures;
 		parameters = pmc.parameters;
 		object3D = pmc.object3D;
-		object3D.analemma = undefined;
 		lights = pmc.lights;
 		ground = pmc.ground;
 
