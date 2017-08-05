@@ -12,10 +12,12 @@ The International Building Performance Simulation Association (IBPSA) is a non-p
 
 This is an unofficial site created by and for Building Simulation 2017 conference attendees.
 
-* Twitter hashtag: https://twitter.com/hashtag/BuildingSimulation2017
+* Twitter hashtag: <https://twitter.com/hashtag/BuildingSim2017>
+	* Note that some peeps are using [#BuildingSimulation2017]( https://twitter.com/hashtag/BuildingSimulation2017?src=hash )
 * Facebook wall: https://www.facebook.com/buildingsimulation2017/
-* Instagram: https://www.instagram.com/explore/tags/buildingsimulation2017/ ?? no posts yet
-
+* Instagram: ?? no posts yet
+	*  https://www.instagram.com/explore/tags/buildingsimulation2017/ 
+	* https://www.instagram.com/explore/tags/buildingsim2017/
 ***
 
 ## Simulating Building Simulation

@@ -3,6 +3,8 @@
 Sponsor Links
 ====
 
+![]( https://user-images.githubusercontent.com/547626/28993100-37feb2ac-7962-11e7-82eb-65c7136cb4c7.png =600x400 )
+
 On the Building Simulation 2017 web site, the [Sponsors Page]( http://www.buildingsimulation2017.org/sponsors.html ) provides links to the web sites of the forty sponsors,
 
 Which are the best sites? Which sites might have something you are interested in?
