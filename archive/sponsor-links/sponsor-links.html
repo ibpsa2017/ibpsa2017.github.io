@@ -37,9 +37,13 @@
 
 <script>
 
-	let fileName = 'https://crossorigin.me/http://www.buildingsimulation2017.org/sponsors.html';
+	let fileName;
 
+//	fileName = 'https://crossorigin.me/http://www.buildingsimulation2017.org/sponsors.html';
 //	fileName ='https://crossorigin.me/https://www.conftool.pro/bs2017/sessions.php';
+	fileName = 'http://www.whateverorigin.org/get?url=' + encodeURIComponent( "http://www.buildingsimulation2017.org/sponsors.html") + '&callback=?';
+//	fileName = 'https://dl.dropboxusercontent.com/u/4732486/git-repos/ibpsa2017.github.io/sponsor-links.html#https://dl.dropboxusercontent.com/u/4732486/git-repos/ibpsa2017.github.io/menu-sponsor-links.md';
+
 
 	var win;
 	var doc, links, linksInText;

@@ -11,12 +11,11 @@
 -->
 <meta name=description content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name=keywords content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name=date content="2017-08-04" >
+<meta name=date content="2017-07-31" >
 <style id="foo" >
-
 /* items mostly in tag/class/id then alphabetical order */
 
-body, html { background-color: #fefefe; font: 12pt monospace; height: 100%; margin: 0; /* overflow: hidden; */ }
+body, html { font: 12pt monospace; height: 100%; margin: 0; /* overflow: hidden; */ }
 
 a { color: crimson; }
 
@@ -120,7 +119,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 <script>
 
 
-	let projectName = ''; //'ibpsa2017';
+	let projectName = 'ibpsa2017';
 
 
 	init();
@@ -132,7 +131,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		let p = arr.pop();
 
-		projectName = arr.pop().replace( /\.github\.io/gi, '');
+//		projectName = arr.pop();
 
 		showdown.setFlavor( 'github' );
 
@@ -188,9 +187,12 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			main.style.overflow = 'auto';
 
+			try {
 			requestFile( url, mainContents );
 
-		} else if ( url.includes( '.htm' ) ) {
+			} catch( e ) { console.log( 'e', e ); }
+
+		} else if ( url.includes( '.html' ) ) {
 
 			main.innerHTML = '<iframe id=mainIframe class=ifr src=' + url + ' ></iframe>';
 
@@ -198,8 +200,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		} else {
 
-			menuIframe.contentWindow.location.hash = url;
 			mainIframe.contentWindow.location.hash = url;
+			menuIframe.contentWindow.location.hash = url;
 
 		}
 
@@ -221,40 +223,6 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		}
 
-		if ( !menu.style.width || menu.style.width === '250px' ) {
-
-			main.style.width = ( window.innerWidth - 250 ) + 'px';
-
-		} else { 
-
-			main.style.width = window.innerWidth + 'px';
-
-		}
-
-	}
-
-
-
-	function toggleNav() {
-
-		if ( !menu.style.width || menu.style.width === '250px' ) {
-
-			menu.style.width = '0';
-			hamburger.style.left = '0';
-
-			main.style.marginLeft = '0';
-			main.style.width = window.innerWidth + 'px';
-
-		} else {
-
-			menu.style.width = '250px';
-			hamburger.style.left = '250px';
-
-			main.style.marginLeft = '250px';
-			main.style.width = ( window.innerWidth - 250 ) + 'px';
-
-		}
-
 	}
 
 
@@ -271,6 +239,26 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 
 
+	function toggleNav() {
+
+		if ( !menu.style.width || menu.style.width === '250px' ) {
+
+			menu.style.width = '0';
+			hamburger.style.left = '0';
+			main.style.marginLeft = '0';
+
+		} else {
+
+			menu.style.width = '250px';
+			hamburger.style.left = '250px';
+			main.style.marginLeft = '250px';
+
+		}
+
+	}
+
+
+
 	function requestFile( url, target ) {
 
 		let converter, xhr;
@@ -279,6 +267,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'get', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error', xhr  ); };
 		xhr.onload = function() {
 
 			target.innerHTML = converter.makeHtml( xhr.responseText );

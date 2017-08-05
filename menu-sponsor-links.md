@@ -1,4 +1,9 @@
 
 
-<div style="border: 0px red solid; height: 700px;" ); ><iframe src=sponsor-links.html class=ifr ></iframe></div>
 
+
+<iframe src=sponsor-links/sponsor-links.html height=700 width=100% frameBorder=0 ></iframe>
+
+***
+
+<h1 style=text-align:center; > &#x2766; </h1>
