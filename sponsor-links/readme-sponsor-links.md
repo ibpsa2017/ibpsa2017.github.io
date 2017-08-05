@@ -32,4 +32,6 @@ The source code for grabbing we used to capture the data is on GitHub.
 Which sites do you think are the the most effective?
 
 
+### [Post on GitHub]( https://github.com/ibpsa2017/ibpsa2017.github.io/issues/3 )
 
+### [Tweet]( https://twitter.com/ta/status/893706373862531074 )

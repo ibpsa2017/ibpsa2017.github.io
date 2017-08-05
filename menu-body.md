@@ -1,7 +1,7 @@
 IBPSA 2017 related
 ### [Sponsor links]( #menu-sponsor-links.md "View all 40 sites in a minute or two" )
 
-### [Conference session catalog in a single page]( #sessions-building-simulation-2017.html "Speed your way to deciding what to see" )
+### [Conference agenda catalog in a single page]( #sessions-building-simulation-2017.html "Speed your way to deciding what to see" )
 
 ***
 

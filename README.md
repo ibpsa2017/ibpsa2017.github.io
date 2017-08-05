@@ -1,4 +1,8 @@
-# [ibpsa2017.github.io]( https://ibpsa2017.github.io ) Read ME
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ibpsa2017.github.io/#README.md "View file as a web page." ) </span>
+
+
+
+# [ibpsa2017.github.io]( https://ibpsa2017.github.io ) Read Me
 
 ## Hello, World!
 
