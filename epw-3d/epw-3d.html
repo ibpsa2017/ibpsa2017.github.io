@@ -111,7 +111,7 @@
 
 		}
 
-		title.innerHTML = '<h1><a href="" >' + document.title +'</a> &nbsp; <a href="index.html" target="_blank">&#x1F5D7;</a></h1>';
+		title.innerHTML = '<h1><a href="" >' + document.title +'</a> &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 //		renderer.setClearColor(new THREE.Color( 0xaaaaaa, 1.0 ));
@@ -124,6 +124,8 @@
 		camera.position.set( 0, 80, 120 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 200;
+
 
 		scene = new THREE.Scene();
 		scene.fog = new THREE.Fog( 0xffffff, 80, 200 );
