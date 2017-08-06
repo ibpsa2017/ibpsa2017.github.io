@@ -146,6 +146,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
+		window.addEventListener("orientationchange", function( { location.reload() ); });
+
 		window.addEventListener( 'resize', onWindowResize, false );
 
 		onWindowResize();
