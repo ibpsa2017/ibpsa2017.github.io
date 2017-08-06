@@ -1,4 +1,4 @@
-<p style=margin:0;padding:0; ><a href="https://github.com/ladybug-tools/ladybug-web" target="_blank">ibpsa2017</a></p>
+<p style=margin:0;padding:0; ><a href="https://ibpsa2017.github.io/" target="_blank">ibpsa2017</a></p>
 
 ## [Analemma3 3D]( index.html )
 
