@@ -5,7 +5,7 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0; padding: 0 10px 0 0; } 
+	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; max-width: 300px; } 
 
 	button { background-color: #ccc; }
 
@@ -18,9 +18,9 @@
 <body>
 <script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
 
-<p id=epwContents >
+<p id=epwContents ></p>
 
-</p>
+<p id=toggles ></p>
 <p>
 <button onclick="initSunPath();" >Draw Sun Path</button>
 </p>
@@ -40,9 +40,11 @@ Hour <output id=outHour for="inpHour" ></output>
 
 <p>
 Click to start & stop:
-<button onclick="togglePlayTheYear();" >Play the Year</button> 
 </p>
 
+<p>
+<button onclick="togglePlayTheYear();" >Play the Year</button> 
+</p>
 
 <p>
 See read me for details
@@ -81,7 +83,7 @@ See read me for details
 
 	function init() {
 
-		if ( !parent.mainIframe ) {
+		if ( parent.main && !parent.mainIframe ) {
 
 			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="epw-3d.html" ></iframe>';
 
@@ -95,24 +97,6 @@ See read me for details
 
 
 		window.addEventListener( 'close', function() { playTheYear = false; }, false );
-
-/*
-		parent.mainIframe.onload = function() { 
-
-console.log( '333',  parent.mainIframe.contentWindow.scene ); 
-
-			parent.mainIframe.contentWindow.addEventListener( 'load', function() { 
-
-console.log( '444', scene ); 
-
-
-			}, false );
-
-//				initSunPath();
-
-		};
-*/
-
 
 	}
 
@@ -169,9 +153,29 @@ console.log( '444', scene );
 //console.log( '', pointer );
 
 		}
+
 		inpMonth.onclick = setMonth;
 		inpDate.onclick = setDate;
 		inpHour.onclick = setHour;
+
+		if ( playTheYear ) { play(); }
+
+		toggles.innerHTML += 
+			'<p>' +
+			'<input type=checkbox id = "chkRotate" checked > Rotation' +
+			'</p>';
+
+
+		chkRotate.onclick = toggleRotation;
+
+	}
+
+
+
+	function toggleRotation() {
+
+		controls.autoRotate = !controls.autoRotate;
+
 	}
 
 
@@ -307,6 +311,7 @@ console.log( '444', scene );
 	}
 
 
+
 	function drawPointer3D() {
 
 		var geometry, material, mesh;
@@ -324,6 +329,8 @@ mesh.scale.multiplyScalar( 0.25 );
 		return mesh;
 
 	}
+
+
 
 	function getEPW() {
 
@@ -363,6 +370,7 @@ mesh.scale.multiplyScalar( 0.25 );
 		updateScene();
 
 	}
+
 
 
 	function updateScene(){
