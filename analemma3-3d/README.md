@@ -1,15 +1,15 @@
-<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ladybug-tools.github.io/ladybug-web/analemma3-3d/ 'View file as a web page.' ) </span>
+<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://github.com/ibpsa2017/ibpsa2017.github.io/tree/master/analemma3-3d/ 'View file as a web page.' ) </span>
 
 Analemma 3D Read Me
 ====
 
-<iframe src="analemma3-3d.html" width="600" height="500" >
+<iframe src="https://ibpsa2017.github.io/analemma3-3d/index.html" width="600" height="500" >
 <img src="../images/ladybug-logo.png" >
-Analema3 3D showing downtown San Francisco with Hyatt Embarcadero at center
 </iframe>
+_Analema3 3D showing downtown San Francisco with Hyatt Embarcadero at center_
+<span style="display: none" >Not visible in GitHub source code view</span>
 
-
-
+## Full Screen: [Analemma 3D ]( https://ibpsa2017.github.io/analemma3-3d/index.html)
 
 Click the 'San Francisco' link for a quick demo of what this script can do. Click the title in the menu to return to this home page / read me file.
 
