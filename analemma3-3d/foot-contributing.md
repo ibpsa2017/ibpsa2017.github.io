@@ -21,7 +21,7 @@ We've put together the following guidelines to help you figure out where you can
 
 The first thing to do is to register a user name with [GitHub]( https://github.com/ ).
 
-You will need to supply a username and email address and to create a password.
+You will need to supply a user name and email address and to create a password.
 
 After you have registered you can go to your [GitHub settings]( https://github.com/settings/profile ). Here you can add a photo and update your bio. It's a good thing to add at least some data - especially a photo and a location. These help your friends remember and know that it is really you.
 
@@ -34,14 +34,14 @@ You will see the 'Watch' and 'Star' buttons
 ![github-top-right-screen-capture.png]( https://cdn.glitch.com/8f4ee7c6-c279-4f9f-8598-a145f33d2ea6%2Fgithub-top-right-screen-capture.png?1499556746028 =600x100 ) 
 _note the [freeCodeCamp]( https://freecodecamp.com/ ) 'Watch' and 'Star' buttons at top right_
 
-Please click both of these buttons for [XXXXX on GitHub]( https://github.com/xxxxx/xxxxx.github.io ). 
+Please click both of these buttons for [ibpsa2017 on GitHub]( https://github.com/ibpsa2017/ibpsa2017.github.io ). 
 
 Clicking 'Star' makes you feel good - and it lets the world know there is interest in our project. Clicking 'Watch' means you receive an email when there is an issue. Any time you start getting too many messages, you may click this button again to update your preferences.
 
 
 ## Joining the Team
 
-The next thing you can do is to request becoming a member of the organization. If you personally know a member then you might send them a request for an invitation. Anther way is to create an [issue on XXXXX]( https://github.com/xxxxx/xxxxx.github.io/issues ).
+The next thing you can do is to request becoming a member of the organization. If you personally know a member then you might send them a request for an invitation. Anther way is to create an [issue on ibpsa2017.github.io ]( https://github.com/ibpsa2017/ibpsa2017.github.io/issues ).
 
 For further details see GitHub's [Managing membership in your organization]( https://help.github.com/articles/managing-membership-in-your-organization/ )
 
