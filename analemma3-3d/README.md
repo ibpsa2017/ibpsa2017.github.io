@@ -1,4 +1,4 @@
-<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://github.com/ibpsa2017/ibpsa2017.github.io/tree/master/analemma3-3d/ 'View file as a web page.' ) </span>
+<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://ibpsa2017.github.io/analemma3-3d/index.html 'View file as a web page.' ) </span>
 
 Analemma 3D Read Me
 ====
