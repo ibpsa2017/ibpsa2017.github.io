@@ -212,14 +212,18 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 	function onWindowResize(){
 
+		const ifr = document.querySelector( 'iframe' );
+
 		if ( window.innerWidth < 1000 ) {
 
 			butEditFile.style.display = 'none';
+			if ( ifr ) { ifr.style.display = 'none'; }
 			hamburger.innerHTML = '&#9776;';
 
 		} else {
 
 			butEditFile.style.display = '';
+			if ( ifr ) { ifr.style.display = ''; }
 			hamburger.innerHTML = '&#9776; slide';
 
 		}
