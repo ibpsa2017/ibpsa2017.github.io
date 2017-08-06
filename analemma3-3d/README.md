@@ -3,7 +3,7 @@
 Analemma 3D Read Me
 ====
 
-<iframe src="https://ibpsa2017.github.io/analemma3-3d/index.html" width="600" height="500" >
+<iframe src="https://ibpsa2017.github.io/analemma3-3d/index.html#menu-traveling.md" width="600" height="500" >
 <img src="../images/ladybug-logo.png" >
 </iframe>
 _Analema3 3D showing downtown San Francisco with Hyatt Embarcadero at center_
