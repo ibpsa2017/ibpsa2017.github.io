@@ -19,7 +19,7 @@ That's why we built the sponnsor link script.
 
 * [Sponsor links]( #menu-sponsor-links.md "View all 40 sites in a minute or two" )
 
-First click on any logo in the menu on the left. Then click on the left and right arrows.
+Click on any logo in the menu on the left. Then click on the left and right arrows.
 
 A fresh window pops up for each web site - replacing the previous web site. 
 
@@ -27,7 +27,9 @@ You can have a glance at all forty sites in a minute or so. Instead of wasting t
 
 The separate window thing is a bit of a hassle, but it has everything to do with security and preventing malware and spoofing activity.
 
-The source code for grabbing we used to capture the data is on GitHub.
+The script works on a mobile device. Unfortunately, you must hit the go back / previous page button each with each new site.
+
+The source code for grabbing we used to capture the data is on [GitHub]( https://github.com/ibpsa2017/ibpsa2017.github.io/tree/master/sponsor-links ).
 
 Which sites do you think are the the most effective?
 
