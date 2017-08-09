@@ -9,6 +9,18 @@ _Script of the moment: [EPW 3D]( https://ibpsa2017.github.io/epw-3d/index.html )
 
 ***
 
+## Introduction to Open Web Tools Miniworkshop 
+
+Earlier versions of what you say are here: http://www.ladybug.tools/ladybug-web/tt6-ladybug-web-r1-all-in-one.html#README.md
+
+There will be a new repo with new material from the demos here plus more in a short time.
+
+Check back here for the link.
+
+Thank you all for your support. Yes, I do silly things. But if in the process we all learn new ways of thinking then maybe it's not so silly after all.
+
+ 
+
 ## Hello, World!
 
 You are at an online presence for things related to 
