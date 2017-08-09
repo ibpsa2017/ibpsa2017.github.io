@@ -9,7 +9,7 @@
 <!-- Mr.doob
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 -->
-<meta name=description content="an unofficial site created by and for Building Simulation 2017 conference attendees." >
+<meta name=description content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name=keywords content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
 <meta name=date content="2017-08-04" >
 <style id="foo" >
@@ -21,7 +21,6 @@ body, html { background-color: #fefefe; font: 12pt monospace; height: 100%; marg
 a { color: crimson; }
 
 blockquote, pre { background-color: #eee; padding: 10px; }
-
 
 .center { border: 0px solid red; left: 0; margin: 0 auto; max-width: 600px; position: absolute; right: 0; }
 
@@ -121,7 +120,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 <script>
 
 
-	let projectName = 'ibpsa2017';
+	let projectName = '';
 
 
 	init();
@@ -131,17 +130,17 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		let arr = location.pathname.split( '/' );
 
-//		let p = arr.pop();
+		let p = arr.pop();
 
-//		projectName = arr.pop().replace( /\.github\.io/gi, '');
+		projectName = arr.pop();
 
 		showdown.setFlavor( 'github' );
 
-//		requestFile( 'menu-head.md', menuHead );
+		requestFile( 'menu-head.md', menuHead );
 
 		requestFile( 'menu-body.md', menuBody );
 
-//		requestFile( 'menu-foot.md', menuFoot );
+		requestFile( 'menu-foot.md', menuFoot );
 
 		onHashChange();
 
@@ -169,13 +168,12 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		document.title = title ? title + ' - ' + projectName : 'README - ' + projectName;
 
-
 		if ( !url ) {
 
 			url = 'README.md';
 
 			requestFile( url, mainContents );
-console.log( '', 23, url, 'oo');
+
 		} else if ( url.startsWith( 'menu' ) ) {
 
 			menuBody.innerHTML = '<div id=menuContents class=menu ></div>';
@@ -267,7 +265,7 @@ console.log( '', 23, url, 'oo');
 
 //		window.open( 'https://glitch.com/edit/#!/' + projectName + '?path=' + location.hash.slice( 1 ) );
 
-		let file = location.hash.slice( 1 ) ? location.hash.slice( 1 ) : 'epw-3d/';
+		let file = location.hash.slice( 1 ) ? location.hash.slice( 1 ) : 'README.md';
 
  		window.open( 'https://github.com/' + projectName + '/' + projectName + '.github.io/blob/master/' + file );
 

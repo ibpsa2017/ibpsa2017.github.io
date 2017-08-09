@@ -14,5 +14,5 @@
 ### [Analemma]( #menu-analemma.md )
 ### [Sun Range]( #menu-sun-range.md )
 ### [Solar Access]( #menu-solar-access.md )
-
+### [Screen Capture]( #menu-solar-screen-capture.md )
 ***

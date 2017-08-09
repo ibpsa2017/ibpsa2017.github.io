@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; max-width: 300px; } 
+
+	button { background-color: #ccc; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+<script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
+
+<p id=epwContents ></p>
+
+<p id=toggles ></p>
+
+<p><button onclick="initBuildRoom();" >Init Build Room</button></p>
+
+Width <output id=outWidth for="inpWidth" ></output>
+<input type="range" id="inpWidth" min=1 max=200 value=50 >
+
+Depth<output id=outDate  for="inpDepth" ></output>
+<input type="range" id="inpDepth" min=0 max=200 value=30>
+
+Height<output id=outHeight for="inpHeight" ></output>
+<input type="range" id="inpHeight" min=0 max=24 value=10 >
+
+
+window Offset <output id=outWinOffset for="inpWinOffset" ></output>
+<input type="range" id="inpWinOffset" min=1 max=200 value=2 >
+
+Window Width<output id=outWinWidth  for="inpWinWidth" ></output>
+<input type="range" id="inpWinWidth" min=0 max=200 value=10>
+
+Window Height<output id=outWinHeight for="inpWinHeight" ></output>
+<input type="range" id="inpWinHeight" min=0 max=24 value=4 >
+
+
+<p><button onclick="alert('In next Release');" >Save to JSON file</button></p>
+
+
+<!--
+<p><button onclick="initSunPath();" >Draw Sun Path</button></p>
+
+Month <output id=outMonth for="inpMonth" ></output>
+<input type="range" id="inpMonth" min=0 max=11  >
+
+Date <output id=outDate  for="inpDate" ></output>
+<input type="range" id="inpDate" min=0 max=31 >
+
+Hour <output id=outHour for="inpHour" ></output>
+<input type="range" id="inpHour" min=0 max=24 >
+-->
+
+
+<script>
+
+	var pmc;
+	var THREE;
+	var scene;
+	var controls;
+	var lightDirectional;
+	var cameraHelper;
+	var parameters;
+	var object3D;
+	var structures;
+	var ground;
+
+	var sun;
+	var analemma;
+	var analemmaRadius;
+
+	let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+	var room;
+
+	init();
+
+	function init() {
+
+		if ( parent.main && !parent.mainIframe ) {
+
+			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="room-builder-r1.html" ></iframe>';
+
+		}
+
+	}
+
+
+
+	function initBuildRoom(){
+
+		if ( !parent.mainIframe ) { parent.location = 'index.html'; return; }
+
+		pmc = parent.mainIframe.contentWindow;
+		THREE = pmc.THREE;
+		scene = pmc.scene
+		controls = pmc.controls;
+		lightDirectional = pmc.lightDirectional;
+		cameraHelper = pmc.cameraHelper;
+		structures = pmc.structures;
+		parameters = pmc.parameters;
+		object3D = pmc.object3D;
+		lights = pmc.lights;
+		buildRoom = pmc.buildRoom;
+
+
+		inpWidth.onmousemove = updateBuildRoom;
+		inpDepth.onmousemove = updateBuildRoom;
+		inpHeight.onmousemove = updateBuildRoom;
+
+		inpWinWidth.onmousemove = updateBuildRoom;
+		inpWinHeight.onmousemove = updateBuildRoom;
+		inpWinOffset.onmousemove = updateBuildRoom;
+
+		updateBuildRoom();
+
+	}
+
+
+	function updateBuildRoom() {
+
+		room = buildRoom( room, 
+			parseFloat( inpWidth.value ), parseFloat( inpHeight.value ), parseFloat( inpDepth.value ),
+			 parseFloat( inpWinOffset.value ), parseFloat( inpWinWidth.value ), parseFloat( inpWinHeight.value ) );
+
+	}
+
+
+
+</script>
+</body>
+</html>
