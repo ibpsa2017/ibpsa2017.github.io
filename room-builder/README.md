@@ -6,7 +6,7 @@
 
 <iframe src=http://ibpsa2017.github.io/room-builder/room-builder-r1.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [Room builder]( https://ibpsa2017.github.io/room-builder/index.html.html )
+## Full Screen: [Room builder]( https://ibpsa2017.github.io/room-builder/index.html )
 
 
 ## Concept
