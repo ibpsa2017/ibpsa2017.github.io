@@ -25,23 +25,23 @@
 <p><button onclick="initBuildRoom();" >Init Build Room</button></p>
 
 Width <output id=outWidth for="inpWidth" ></output>
-<input type="range" id="inpWidth" min=1 max=200 value=50 >
+<input type="range" id="inpWidth" min=1 max=100 value=50 >
 
 Depth<output id=outDate  for="inpDepth" ></output>
-<input type="range" id="inpDepth" min=0 max=200 value=30>
+<input type="range" id="inpDepth" min=0 max=100 value=30>
 
 Height<output id=outHeight for="inpHeight" ></output>
 <input type="range" id="inpHeight" min=0 max=24 value=10 >
 
 
 window Offset <output id=outWinOffset for="inpWinOffset" ></output>
-<input type="range" id="inpWinOffset" min=1 max=200 value=2 >
+<input type="range" id="inpWinOffset" min=1 max=50 value=2 >
 
 Window Width<output id=outWinWidth  for="inpWinWidth" ></output>
-<input type="range" id="inpWinWidth" min=0 max=200 value=10>
+<input type="range" id="inpWinWidth" min=0 max=50 value=10>
 
 Window Height<output id=outWinHeight for="inpWinHeight" ></output>
-<input type="range" id="inpWinHeight" min=0 max=24 value=4 >
+<input type="range" id="inpWinHeight" min=0 max=10 value=4 >
 
 
 <p><button onclick="alert('In next Release');" >Save to JSON file</button></p>
@@ -113,13 +113,13 @@ Hour <output id=outHour for="inpHour" ></output>
 		buildRoom = pmc.buildRoom;
 
 
-		inpWidth.onmousemove = updateBuildRoom;
-		inpDepth.onmousemove = updateBuildRoom;
-		inpHeight.onmousemove = updateBuildRoom;
+		inpWidth.onclick = updateBuildRoom;
+		inpDepth.onclick = updateBuildRoom;
+		inpHeight.onclick = updateBuildRoom;
 
-		inpWinWidth.onmousemove = updateBuildRoom;
-		inpWinHeight.onmousemove = updateBuildRoom;
-		inpWinOffset.onmousemove = updateBuildRoom;
+		inpWinWidth.onclick = updateBuildRoom;
+		inpWinHeight.onclick = updateBuildRoom;
+		inpWinOffset.onclick = updateBuildRoom;
 
 		updateBuildRoom();
 
