@@ -2,7 +2,7 @@
 
 
 
-## [Room builder]( index.html )
+## [Unofficial IBPSA 2017.github.io/]( https://ibpsa2017.github.io/ )
 
 <!--
 #### [README / home page]( #README.md )
