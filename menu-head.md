@@ -1,6 +1,6 @@
 
 
-## [Unofficial IBPSA 2017]( https://ibpsa2017.github.io/ )
+## [Unofficial IBPSA 2017]( index.html  )
 
 <!--
 #### [README / home page]( #README.md )
