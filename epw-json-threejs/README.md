@@ -7,7 +7,7 @@
 
 <iframe src=https://ibpsa2017.github.io/epw-json-threejs/epw-json-threejs.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [EPW JSON Three.js ]( epw-json-threejs.html )
+## Full Screen: [EPW JSON Three.js ]( https://ibpsa2017.github.io/epw-json-threejs/epw-json-threejs.html )
 
 
 ## Concept
@@ -18,6 +18,6 @@
 
 ## Change Log
 
-### 2017-08-10 ~ Theo
+### 2017-08-11 ~ Theo
 
 * R1 first commit
