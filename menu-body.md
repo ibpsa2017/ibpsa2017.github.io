@@ -7,7 +7,9 @@ IBPSA 2017 related
 
 Building simulation
 
-### [EPW Basic]( #epw-basic/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-basic/epw-basic.html )
+### [EPW JSON Basic]( #epw-json-basic/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-basic/epw-json-basic-cors-anywhere.html )
+
+### [EPW JSON Three.js]( #epw-json-threejs/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-threejs/epw-json-threejs.html )
 
 ### [EPW Data Parser]( #epw-parser/README.md "A fun fail" ) [&#x1F517;]( epw-parser/epw-parser-r2.html )
 
