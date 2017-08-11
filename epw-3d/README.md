@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ibpsa2017.github.io/epw-3d/#README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://ibpsa2017.github.io/epw-3d/#README.md "View file as a web page." ) </span>
 
 
 EPW 3D Read Me
