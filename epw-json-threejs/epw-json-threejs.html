@@ -25,9 +25,6 @@
 
 <script>
 
-	let buenosAires = 'url://www.eco-envolventes.net/data/json/allEPW/ARG/ARG_BUENOS%20AIRES.json,field:Dew Point Temperature';
-	let sanFrancisco = 'url://www.eco-envolventes.net/data/json/allEPW/USA/USA_San%20Francisco.json,field:Dry Bulb Temperature';
-
 	var parameters = {};
 
 	let renderer, camera, controls, scene;
@@ -35,6 +32,7 @@
 
 	init();
 	animate();
+
 
 	function init() {
 
@@ -56,118 +54,36 @@
 		let axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 
-
-		onHashChange();
-
-		window.addEventListener( 'hashchange', onHashChange, false );
-
-
-
 	}
 
 
 
-	function onHashChange() {
+	function drawMesh( heights ) {
 
-		let url, target;
+		let difference;
 
-		if ( !location.hash ) {
-
-//			location.hash = buenosAires;
-			location.hash = sanFrancisco;
-
-			return;
-
-		}
-
-		getParametersFromHash();
-
-	}
-
-
-	function getParametersFromHash() {
-
-		let hashes, regex, str, params;
-
-		str = location.hash.slice( 1 );
-
-		strJ = '{"' + str.replace( /:/g, '": "' ).replace( /,/g, '", "' ) + '" }';
-
-console.log( 'params', strJ );
-
-		params = JSON.parse( strJ );
-
-console.log( 'params', params );
-
-		parameters = {};
-
-		parameters.field = params.field ? params.field : 'Dry Bulb Temperature';
-		parameters.heightScale = parameters.heightScale ? parameters.heightScale : 2;
-		parameters.side = 2;
-		parameters.transparent = true;
-
-		url = 'https://cors-anywhere.herokuapp.com/' + params.url;
-
-		requestFile( url );
-
-	}
-
-
-	function requestFile( url ) {
-
-		let xhr;
-
-		xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { info.innerHTML = 'error: ' + xhr };
-		xhr.onprogress = function( xhr ) { info.innerHTML = 'Bytes loaded: ' + xhr.loaded };
-		xhr.onload = callback;
-		xhr.send( null );
-
-	}
-
-
-
-	function callback( xhr ) {
-
-		epwJson = JSON.parse( xhr.target.response );
-
-console.log( 'epwJson', epwJson );
-
-		for ( var i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
-
-			if ( epwJson.hourlyDataFields[ i ].name === parameters.field ) {
-
-				fieldIndex = i;
-				break;
-
-			}
-		}
-
-		fields = epwJson.hourlyDataFields;
-
-		hours = epwJson.hourlyData;
+		difference = parameters.max - parameters.min;
 
 		geometry = new THREE.PlaneBufferGeometry( 200, 500, 23, 364 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
-		material = new THREE.MeshNormalMaterial();
+		material = new THREE.MeshNormalMaterial( { side: 2 } );
 
 		index = 1;
 
-		for ( var i = 0; i < hours.length; i++ ) {
+		for ( let i = 0; i < heights.length; i++ ) {
 
-			geometry.attributes.position.array[ index ] = hours[ i ][ fieldIndex ] * parameters.heightScale;
+			geometry.attributes.position.array[ index ] = 100 * heights[ i ] / difference;
+
 			index += 3;
 
 		}
 
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
+		geometry.center();
 
 		scene.remove( mesh )
 		mesh = new THREE.Mesh( geometry, material );
-
 		scene.add( mesh );
 
 	}

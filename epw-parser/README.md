@@ -20,6 +20,37 @@ From: https://energyplus.net/weather/simulation
 
 > Users of energy simulation programs have a wide variety of weather data from which to choose – from locally recorded weather data to preselected 'typical' years –, often a bewildering range of options. Many locations are available on this site – but users may have special needs for different locations. This page lists sites that may provide those other user locations. Before tapping the resources below, users should check if an existing EnergyPlus Weather Format (EPW) file is within 20-30 miles (30-50 km) and within a few hundred feet (100 m) of elevation.
 
+## Original text for this effort:
+
+## First Forays: Hacking Conferences Nicely
+
+The EPW Parser is my first foray onto displaying EnergyPlus weather (EPW) data in 3D. The challenge: Can you show 365 x 24 x 8 items of weather data all at once in a readable manner?
+
+Let us just say that this little effort has aspects that are interesting.
+
+But the main thing is that we are up and running. And there is a **much bigger challenge at hand**. This new challenge is to see: can create new material during the conference itself? Can we stop mucking around with last year's PDFs. Instead, can live in the moment and create and design or identify some new patterns based on what we are seeing and hearing in the sessions?
+
+Have you ever participated in a [hackathon]( https://en.wikipedia.org/wiki/Hackathon ). There is a liveness - and a lack of sleep - contrasts markedly with the usual demeanor at traditional style conferences.
+
+There's nothing particularly right or wrong about either type of meet-up. But I'm thinking it might be fun to bring in some hacking thoughts - nice ones - into the process.
+
+Things I want to do include:
+
+* Looking at some complex visualization or analysis and seeing if it's possible to create some of the effect with eazy peazy, beginner level code
+* Respond to any 'I bet you can't do this' challenges
+* Explore ways of communicating / simulating with participants
+
+There are two important side aspects to this thinking
+
+* Helping beginners get started wit code they can understand and use to perform helpful tasks
+* Helping full-stack developers tackle even more advanced work because they know the lower end is being taken of 
+
+Of course, everything will be free and open source and available on GitHub with links from this site.
+
+Bye for now...
+
+Theo
+
 
 ## Links of Interest
 

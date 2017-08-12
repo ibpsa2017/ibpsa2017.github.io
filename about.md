@@ -1,8 +1,30 @@
 
 
-About This Effort
-===
 
+_The following text appeared on the home page when this effort first launched._
+
+# Hello, World!
+
+You are at an online presence for things related to 
+
+* http://www.ibpsa.org/
+* http://www.buildingsimulation2017.org
+
+The International Building Performance Simulation Association (IBPSA) is a non-profit international society of building performance simulation researchers, developers and practitioners, dedicated to improving the built environment.
+
+This is an unofficial site created by and for Building Simulation 2017 conference attendees.
+
+* Twitter hashtag: <https://twitter.com/hashtag/BuildingSim2017>
+	* Note that some peeps are using [#BuildingSimulation2017]( https://twitter.com/hashtag/BuildingSimulation2017?src=hash )
+* Facebook wall: https://www.facebook.com/buildingsimulation2017/
+* Instagram: ?? no posts yet
+	*  https://www.instagram.com/explore/tags/buildingsimulation2017/ 
+	* https://www.instagram.com/explore/tags/buildingsim2017/
+
+***
+
+
+# About This Effort
 
 My name is Theo Armour. I heart simulation, 3D and free open source software.
 
