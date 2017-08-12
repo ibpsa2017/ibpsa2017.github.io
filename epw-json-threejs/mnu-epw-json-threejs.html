@@ -5,7 +5,7 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; overflow: hidden; max-width: 300px; } 
+	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; overflow: hidden; max-width: 300px; }
 	a { color: crimson; text-decoration: none; }
 	h1 { margin: 10px 0 10px 0; }
 	p { width: 250px;}
@@ -61,7 +61,40 @@
 <script>
 
 
+	let fields = [
+
+		{ name: "Dry Bulb Temperature", units: "C", min: -15, max: 40 },
+		{ name: "Dew Point Temperature", units: "C", min: -15, max: 40 },
+		{ name: "Relative Humidity", units: "%", min: 0, max: 110 },
+		{ name: "Atmospheric Station Pressure", units: "Pa", min: 50000, max: 120000 },
+		{ name: "Extraterrestrial Horizontal Radiation", units: "Wh/m2", min: 0, max: 1500 },
+		{ name: "Extraterrestrial Direct Normal Radiation", units: "Wh/m2", min: 0, max: 1500 },
+		{ name: "Horizontal Infrared Radiation Intensity", units: "Wh/m2", min: 0, max: 1000 },
+		{ name: "Global Horizontal Radiation", units: "Wh/m2", min: 0, max: 1000 },
+		{ name: "Direct Normal Radiation", units: "Wh/m2", min: 0, max: 1000 },
+		{ name: "Diffuse Horizontal Radiation", units: "Wh/m2", min: 0, max: 1000 },
+		{ name: "Horizontal Infrared Radiation Intensity", units: "Wh/m2", min: 0, max: 100000 },
+		{ name: "Global Horizontal Illuminance", units: "lux", min: 0, max: 100000 },
+		{ name: "Direct Normal Illuminance", units: "lux", min: 0, max: 100000 },
+		{ name: "Diffuse Horizontal Illuminance", units: "lux", min: 0, max: 50000 },
+		{ name: "Zenith Luminance", units: "Cd/m2", min: 0, max: 1000 },
+		{ name: "Wind Direction", units: "degrees", min: 0, max: 360 },
+		{ name: "Wind Speed", units: "m/s", min: 0, max: 40 },
+		{ name: "Total Sky Cover", units: "/10ths", min: 0, max: 10 },
+		{ name: "Opaque Sky Cover", units: "/100ths", min: 0, max: 100 },
+		{ name: "Visibility", units: "m", min: 0, max: 100000 },
+		{ name: "Ceiling Height", units: "m", min: 0, max: 10000 },
+		{ name: "Present Weather Observation", units: "", min: 0, max: 10000 },
+		{ name: "Present Weather Codes", units: "", min: 0, max: 10000 },
+		{ name: "Precipitable Water", units: "mm", min: 0, max: 1000 },
+		{ name: "Days Since Last Snowfall", units: "days", min: 0, max: 100 },
+		{ name: "Liquid Precipitation Depth", units: "mm", min: 0, max: 1000 }
+
+	];
+
+
 	init();
+
 
 	function init() {
 
@@ -100,8 +133,8 @@
 
 		}
 
-//		inpCountry.selectedIndex = 0;
-		inpCountry.selectedIndex = Math.floor( Math.random() * inpCountry.length );
+		inpCountry.selectedIndex = 0;
+//		inpCountry.selectedIndex = Math.floor( Math.random() * inpCountry.length );
 
 		getCities();
 
@@ -145,7 +178,7 @@
 
 		fileName = encodeURI( 'http://www.eco-envolventes.net/data/json/allEPW/' + country + '/' + country + '_' + city + '.json' );
 
-console.log( 'fileName', fileName );
+//console.log( 'fileName', fileName );
 
 		url = 'https://cors-anywhere.herokuapp.com/' + fileName;
 
@@ -177,7 +210,7 @@ console.log( 'fileName', fileName );
 
 		epwJson = JSON.parse( xhr.target.response );
 
-//console.log( 'epwJson', epwJson );
+console.log( 'epwJson', epwJson );
 
 		inpField.innerHTML = '';
 
@@ -190,7 +223,7 @@ console.log( 'fileName', fileName );
 		spnDataFields.innerHTML = 'Data fields (' + epwJson.hourlyDataFields.length + '):';
 
 		inpField.selectedIndex = 0;
-		inpField.selectedIndex = Math.floor( Math.random() * inpField.length );
+//		inpField.selectedIndex = Math.floor( Math.random() * inpField.length );
 
 		getField();
 
@@ -217,14 +250,13 @@ console.log( 'fileName', fileName );
 
 		epwData.innerHTML = data.join( ', ' );
 
-		getCalculations( data, data );
+		getCalculations( data );
 
 	}
 
 
 
 	function getCalculations( arr ) {
-
 
 		const b = '<br>';
 
@@ -248,6 +280,7 @@ console.log( 'fileName', fileName );
 
 			inpCity.value + b +
 			inpField.value + b +
+			'Units: ' + fields[ inpField.selectedIndex ].units + b +
 			'Min: ' + min + b +
 			'Max: ' + max + b +
 			'Average: ' + avg.toFixed( 2 ) + b +
@@ -264,14 +297,14 @@ console.log( 'fileName', fileName );
 			average: avg,
 			median: median,
 			max: max,
-			min: min
+			min: min,
+			field: fields[ inpField.selectedIndex ]
 
 		}
 
 		parent.mainIframe.contentWindow.drawMesh( arr );
 
-console.log( 'arr', arr );
-		
+// console.log( 'arr', arr );
 
 	}
 
