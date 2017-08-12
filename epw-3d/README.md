@@ -4,7 +4,7 @@
 EPW 3D Read Me
 ====
 
-<iframe src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px /* onload=this.contentWindow.controls.enableZoom=false; */ ></iframe>
 _EPW 3D showing downtown San Francisco with Hyatt Embarcadero at center_
 <span style="display: none" >Not visible in GitHub source code view</span>
 
