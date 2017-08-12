@@ -171,9 +171,15 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		if ( !url ) {
 
-			url = 'README.md';
+//			url = 'README.md';
+//			requestFile( url, mainContents );
 
-			requestFile( url, mainContents );
+
+			url = 'view-github-issues.html';
+
+			main.innerHTML = '<iframe id=mainIframe class=ifr src=' + url + ' ></iframe>';
+
+			main.style.overflow = 'hidden';
 
 		} else if ( url.startsWith( 'menu' ) ) {
 
