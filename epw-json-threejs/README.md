@@ -2,8 +2,7 @@
 
 
 
-[EPW JSON Three.js Read Me]( #README.md )
-====
+# [EPW JSON Three.js Read Me]( #README.md )
 
 <iframe src=https://ibpsa2017.github.io/epw-json-threejs/index.html width=100% height=600px /* onload=this.contentWindow.controls.enableZoom=false; */ ></iframe>
 
@@ -12,11 +11,27 @@
 
 ## Concept
 
+Trying to match the capabilities of [3D Weather Chart]( http://www.eco-envolventes.net/tools/170614a/3dChart1.html ) with simpler code and fewer dependencies.
+
+## To Do
+
+* 2017-08-12 ~ Add legend
+* 2017-08-12 ~ Add signage
+
+
 
 ## Links of Interest
 
+See [EPW read me]( https://ibpsa2017.github.io/index.html#readme-epw.md )
+
 
 ## Change Log
+
+
+### 2017-08-12 ~ Theo
+
+* Mostly working as intended
+
 
 ### 2017-08-11 ~ Theo
 

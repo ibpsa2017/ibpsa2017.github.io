@@ -17,22 +17,22 @@ _txt_
 
 Weather is a fascinating topic. It's certainly one of the most talked about topics. And every news program has time to tell you the weather.
 
-Perhaps as a result of this frequency of appearances, the task of visualizing weather is quite old-school.
+Perhaps as a result of this frequency of appearances, most methods of visualizing weather are quite old-school.
 
-There are pictures maps with stuff like icons, isolines and arrows written on them. And the maps may show boundaries, radar and satellite imagery. After that you are left with Beaufort wind charts and tables of numbers. In other words it's stuff you've seen before or stuf that too tedious to look at.
+There are pictures maps with stuff like icons, isolines and arrows written on them. And the maps may show boundaries, radar and satellite imagery. After that you are left with Beaufort wind charts and tables of numbers. In other words it's stuff you've seen before or stuff that's just too tedious to look at.
 
-Weather visualization has been disruptable for much of this decade. The technology to view massive amounts of data is readily available. The ongoing issue is readily available data sources.  Yes, there are plenty of places where you can download a file at a time and run it on a program that you purchased and installed on your computer. In other words it's stuff that people who are paid to do this kind of work do. It's a day job for programmers and engineers. But it's not the sort of thing peeps are going to do just for the fun of it.
+Yet weather visualization has been disruptable for much of this decade. The technology to view massive amounts of data is readily available. The ongoing issue is readily available data sources.  Yes, there are plenty of places where you can download a file at a time and run it on a program that you purchased and installed on your computer. In other words it's stuff that people who are paid to do this kind of work do. It's a day job for programmers and engineers. But it's not the sort of thing peeps are going to do just for the fun of it.
 
 If we are to disrupt weather viz it will happen when both the tools and the data are readily accessible to artists, designers and hackers.
 
-A typical example is the availability of EnergyPlus Weather (EPW) files. These types of files are used by engineers all over the world to help the calcilate the size of furnaces air air conditions need for a construction project. 
+A typical example is the availability of EnergyPlus Weather (EPW) files. These types of files are used by engineers all over the world to help the calculate the size of furnaces air air conditions need for a construction project. 
 
 > Displaying Design Conditions from "Climate Design Data 2009 ASHRAE Handbook". ASHRAE design conditions are carefully generated from a period of record (typically 30 years) to be representative of that location and to be suitable for use in heating/cooling load calculations
 
 
-These files contain standard or typical weather data for all 365 x 24 or 8,760 hours per year. These files include op to 26 variables of data including temperature, wind speed. humidity, visibility, solar radiation and more. They are generall under two megabytes in size. There are currently files for about three thousand cities available. 
+These files contain standard or typical weather data for all 365 x 24 or 8,760 hours per year. These files include op to 26 variables of data including temperature, wind speed. humidity, visibility, solar radiation and more. They are generally under two megabytes in size. There are currently files for about three thousand cities available. 
 
-In order to view the data, typically you go to a site like [EPWMap]( http://www.ladybug.tools/epwmap/ ). You then click around until you find the file you need and then download it to your computer, extract the data from the zip file. Then you open a program - or go to a web site like [epwvis]( https://mdahlhausen.github.io/epwvis/ ) and upload the file. Repeat three thousand times. If you happen to open the files, you will note the data is in some kind of old-timey format. 
+In order to view the data, typically you go to a site like [EPWMap]( http://www.ladybug.tools/epwmap/ ). You then click around until you find the file you need and then download it to your computer, extract the data from the ZIP file. Then you open a program - or go to a web site like [epwvis]( https://mdahlhausen.github.io/epwvis/ ) and upload the file. Finally you are looking at the data. Repeat three thousand times. If you happen to open the files, you will note the data is in some kind of old-timey format. 
 
 
 Now just click on this link:
@@ -41,7 +41,7 @@ Now just click on this link:
 
 Bingo, you have data! Courtesy of the nice peeps at Pilota University in Bogata, Columbia who have converted all the EPW files to JSON and made them available for directly opening in a web page.
 
-We need more nice peeps like this and we need the files on freely available places like Wiki Commons and GitHub. Anyway this is a start. I should notr that organizations such as weatherunderground have made extensive data available. The issue is that you have to registe, and abide by rate limits and there's a learning curve as well. 
+We need more nice peeps like this and we need the files on freely available places like Wiki Commons and GitHub. Anyway this is a start. I should note that organizations such as weatherunderground have made extensive data available. The issue is that you have to register, and abide by rate limits and there's a learning curve as well and etc. 
 
 But this freely/easily weather data thing is new - and much welcomed.
 
@@ -51,9 +51,9 @@ OK, yay, now you have tools and data. Who do you disrupt?
 
 The answer is simple: me and you. 
 
-You have very fixed notions about what the numbers can do. You are stuck on the idea that the numbers for the weather in Albuquerque are stuck to a map of Arizona. You need to let the numbers for weather of a thousand cities to float freely in space.
+You have very fixed notions about what the numbers can do. You are stuck on the idea that the numbers for the weather in Albuquerque are stuck to a map of Arizona. You need to let the numbers for the weather of a thousand cities to float freely in space.
 
-You nee to think like a cartoonist and let all manner of exaggeration happen.
+You need to think like a cartoonist and let all manner of exaggeration happen.
 
 And most of all you have to leave the simple world of paper where you can only view two or three variables at a time. You have to move into 3D viz - and let a [hundred variables bloom]( https://en.wikipedia.org/wiki/Hundred_Flowers_Campaign ).
 
@@ -62,7 +62,6 @@ And most of all you have to leave the simple world of paper where you can only v
 
 #### [EPW JSON Basic]( #epw-json-basic/epw-json-basic-cors-anywhere.html )
 
-
 Throughout this web site we are doing our best to separate the 3D tools code from the user interface tools. This first experiment is the attempt to provide user interface access to all the JSON data files. This 300 lines of code does exactly this - it helps you find a file and data of interest and it all fits into a narrow space such as a scrollable menu.
 
 One interesting aspect is that the Pilato University web site is not [cross-origin resource sharing]( https://en.wikipedia.org/wiki/Cross-origin_resource_sharing ) enabled and we wanted anybody to be able to run this file without a server. Therefor we are using a free proxy service - https://cors-anywhere.herokuapp.com/ - to gather the data and forward it to your browser.
@@ -70,11 +69,11 @@ One interesting aspect is that the Pilato University web site is not [cross-orig
 
 #### [EPW JSON Three.js]( #epw-json-threejs/README.md )
 
-The file we are currently working on. It attempts to be a rewrite of the eco-envolventes with single depency on Three.js. It also tries to be entry level cookbook code that any designer or artist with a small ammout of coding knpwledge good get started wuth. The menu is built with the EPW JSON Basic code. The graphics are built with 300 lines of Three.js code.
+The file we are currently working on. It attempts to be a rewrite of the eco-envolventes with single dependency on Three.js. It also tries to be entry level cookbook code that any designer or artist with a small ammount of coding knowledge good get started with. The menu is built with the EPW JSON Basic code. The graphics are built with 300 lines of Three.js code.
 
 Generally, it shows that the logic is generally correct and it should serve as a test case or a template for future efforts.
 
-Next steps include
+Next steps include:
 
 * Wrapping the numbers around a cylinder instead of being flat
 * Opening multiple surfaces displaying multiple variables at the same time
