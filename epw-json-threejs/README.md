@@ -17,7 +17,7 @@ Trying to match the capabilities of [3D Weather Chart]( http://www.eco-envolvent
 
 * 2017-08-12 ~ Add legend
 * 2017-08-12 ~ Add signage
-
+* 2017-08-12 ~ Try coutry.json instead of country.js
 
 
 ## Links of Interest
