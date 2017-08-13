@@ -4,7 +4,6 @@ _The following texts were on the home page at the launch of this site_
 # Simulating Building Simulation
 
 
-
 We love simulating things. We find simulating stimulating.
 
 These days nearly anything can be simulated. So **let's simulate the Building Simulation 2017**. ;-)

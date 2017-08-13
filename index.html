@@ -147,7 +147,9 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
-		window.addEventListener( 'orientationchange', function() { window.location.reload(); } );
+//		window.addEventListener( 'orientationchange', function() { window.location.reload(); } );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false  );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 
