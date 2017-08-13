@@ -8,7 +8,7 @@ IBPSA 2017 Related
 
 ***
 
-Building Simulation
+### [EPW Read Me]( #readme-epw.md )
 
 ### [EPW JSON Basic]( #epw-json-basic/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-basic/epw-json-basic-cors-anywhere.html )
 

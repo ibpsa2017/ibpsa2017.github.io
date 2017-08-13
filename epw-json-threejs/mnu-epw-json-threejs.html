@@ -11,15 +11,13 @@
 	p { width: 250px;}
 	select { width: 100%; }
 
-	#epwData { height:500px;overflow:scroll; }
-
-
-
 	button { background-color: #ccc; }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#epwData { height:500px; overflow:scroll; }
 
 </style>
 </head>
@@ -134,7 +132,7 @@
 		}
 
 		inpCountry.selectedIndex = 0;
-//		inpCountry.selectedIndex = Math.floor( Math.random() * inpCountry.length );
+		inpCountry.selectedIndex = Math.floor( Math.random() * inpCountry.length );
 
 		getCities();
 
@@ -210,7 +208,7 @@
 
 		epwJson = JSON.parse( xhr.target.response );
 
-console.log( 'epwJson', epwJson );
+//console.log( 'epwJson', epwJson );
 
 		inpField.innerHTML = '';
 
@@ -223,7 +221,7 @@ console.log( 'epwJson', epwJson );
 		spnDataFields.innerHTML = 'Data fields (' + epwJson.hourlyDataFields.length + '):';
 
 		inpField.selectedIndex = 0;
-//		inpField.selectedIndex = Math.floor( Math.random() * inpField.length );
+		inpField.selectedIndex = Math.floor( Math.random() * inpField.length );
 
 		getField();
 

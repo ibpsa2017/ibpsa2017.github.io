@@ -10,7 +10,7 @@
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
-	#headsUp { background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.85; 
+	#headsUp { background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.85;
 		position: absolute; z-index: 10; }
 	#menu { position: absolute; text-align: center; width: 100%; }
 
@@ -97,21 +97,9 @@
 		scene.add( axisHelper );
 
 		addBasicLighting();
+
 	}
 
-	function addBasicLighting() {
-
-		light = new THREE.DirectionalLight( 0xffffff );
-		light.position.set( 1, 1, 1 );
-		scene.add( light );
-
-		light = new THREE.DirectionalLight( 0x002288 );
-		light.position.set( -1, -1, -1 );
-		scene.add( light );
-		light = new THREE.AmbientLight( 0x222222 );
-		scene.add( light );
-	 
-	}
 
 
 // We are in an Iframe. The action starts when the parent window tells us to do something
@@ -173,6 +161,25 @@
 
 
 
+	function addBasicLighting() {
+
+		let light;
+
+		light = new THREE.DirectionalLight( 0xffffff );
+		light.position.set( 1, 1, 1 );
+		scene.add( light );
+
+		light = new THREE.DirectionalLight( 0x002288 );
+		light.position.set( -1, -1, -1 );
+		scene.add( light );
+
+		light = new THREE.AmbientLight( 0x222222 );
+		scene.add( light );
+
+	}
+
+
+
 	function onWindowResize() {
 
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -201,15 +208,10 @@
 		if ( intersects.length > 0 ) {
 
 			intersected = intersects[ 0 ];
-//			intersected.rotation.y += 0.1;
-
-//			log.innerHTML = 'Selected cube ID: ' + intersected.name ;
 
 		} else {
 
 			intersected = undefined;
-
-//			log.innerHTML = 'No cube selected';
 
 		}
 
@@ -247,6 +249,7 @@
 		X = Math.floor( 25 * ( vertex.x + 100 ) / 200 );
 		Z = 365 - Math.floor( 365 * ( vertex.z + 250 ) / 500 );
 		hours = Math.floor( 365 * ( vertex.z + 250 ) / 500 ) * 24 + X;
+
 		txt =
 			'Hours: ' + hours + b +
 			'Time: ' + X + b +
@@ -271,7 +274,7 @@
 
 	function onDocumentTouchStart( event ) {
 
-	//	event.preventDefault();
+		event.preventDefault();
 
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;

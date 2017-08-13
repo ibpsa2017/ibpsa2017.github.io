@@ -221,8 +221,6 @@ console.log( 'fileName', fileName );
 
 		const b = '<br>';
 
-// ugh Spread Parameters equals a symbol no normal persons understands
-
 // http://www.jstips.co/en/javascript/array-average-and-median/
 
 		let sum = arr.reduce( ( previous, current ) => current += previous );
@@ -237,6 +235,8 @@ console.log( 'fileName', fileName );
 
 			inpCity.value + b +
 			inpField.value + b +
+
+// ugh Spread Parameters equals a symbol no normal persons understands
 			'Min: ' + Math.min( ... arr ) + b +
 			'Max: ' + Math.max( ... arr ) + b +
 			'Average: ' + avg.toFixed( 2 ) + b +
