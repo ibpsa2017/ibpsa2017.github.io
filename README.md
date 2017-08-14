@@ -47,7 +47,7 @@ In the interest of brevity, Theo Armour provides a list of ten things covered in
 * GitHub and GitHub Pages are wonderful places to host and share material for _ad hoc_ events such as conferences and short projects 
 * Anything can be simulated [hacked] - including conferences...
 * Where will the Sun be is a very old question
-* Current responses are to be found everywhere under the Sun - including the app ture
+* Current responses are to be found everywhere under the Sun - including the app store
 * Code is surprisingly idiosyncratic
 * Even good code may have incomprehensible variables and other insane quirks
 * EPW files are amazing. Getting them is another issue
@@ -56,6 +56,7 @@ In the interest of brevity, Theo Armour provides a list of ten things covered in
 * We must leave the paper world behind and do data viz in new ways
 * We can exaggerate, show more variable interacting and make insights occur more frequently
 
+_2017-08-13 ~ the above list is still a work in progress_
 
 ## Subsequent Efforts
 

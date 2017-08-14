@@ -9,7 +9,7 @@
 <!-- Mr.doob
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 -->
-<meta name=description content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
+<meta name=description content="an unofficial site created by and for Building Simulation 2017 conference attendees." >
 <meta name=keywords content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
 <meta name=date content="2017-08-04" >
 <style id="foo" >
@@ -22,7 +22,8 @@ a { color: crimson; }
 
 blockquote, pre { background-color: #eee; padding: 10px; }
 
-.center { border: 0px solid red; left: 0; margin: 0 auto; max-width: 600px; position: absolute; right: 0; }
+
+.center { border: 0px solid red; left: 0; margin: 0 auto; max-width: 800px; position: absolute; right: 0; }
 
 .ifr { border-width: 0; height: 100%; margin: 0; width: 100%; }
 
@@ -57,7 +58,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 	position: fixed; top: 0; transition: 0.5s; width: 250px; z-index: 1;
 }
 
-#menuHead, #menuBody, #menuFoot { border: 0px red solid; box-sizing: border-box; margin: 0; padding: 0 5px 0 15px;/* overflow: auto; */ }
+#menuHead, #menuBody, #menuFoot { border: 0px red solid; margin: 0; padding: 0 0 0 15px;/* overflow: auto; */ }
 
 
 
@@ -132,7 +133,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 //		let p = arr.pop();
 
-//		projectName = arr.pop();
+//		projectName = arr.pop().replace( /\.github\.io/gi, '');
 
 		showdown.setFlavor( 'github' );
 
@@ -146,7 +147,9 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
-		window.addEventListener( 'orientationchange', function() { window.location.reload(); } );
+//		window.addEventListener( 'orientationchange', function() { window.location.reload(); } );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false  );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 
@@ -211,14 +214,18 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 	function onWindowResize(){
 
+		const ifr = document.querySelector( 'iframe' );
+
 		if ( window.innerWidth < 1000 ) {
 
 			butEditFile.style.display = 'none';
+			if ( ifr ) { ifr.style.display = 'none'; }
 			hamburger.innerHTML = '&#9776;';
 
 		} else {
 
 			butEditFile.style.display = '';
+			if ( ifr ) { ifr.style.display = ''; }
 			hamburger.innerHTML = '&#9776; slide';
 
 		}
