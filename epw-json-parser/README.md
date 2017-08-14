@@ -1,11 +1,11 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ibpsa2017.github.io/#README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://ibpsa2017.github.io/epw-json-parser/#README.md "View file as a web page." ) </span>
 
 
-[EPW Parser Read Me]( https://ibpsa2017.github.io/index.html#epw-parser/README.md )
+[EPW Parser Read Me]( https://ibpsa2017.github.io/index.html#epw-json-parser/README.md )
 ====
 
 
-<iframe src=https://ibpsa2017.github.io/epw-parser/epw-parser-r2.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src=https://ibpsa2017.github.io/epw-json-parser/epw-parser-r2.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 ## Full Screen: [EPW Parser]( https://ibpsa2017.github.io/epw-parser/epw-parser-r2.html )
 

@@ -2,10 +2,10 @@
 <html lang = "en" >
 <head>
 <meta charset = "utf-8" >
-<meta name = description content = "Basic HTML template" >
+<meta name = description content = "Basic EPW JSON template. Select location, request file, gather data." >
 <meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = date content = "2017-08-04" >
-<title>EPW JSON Menu</title>
+<meta name = date content = "2017-08-14" >
+<title>EPW JSON Basic</title>
 <style>
 
 /* width items appear here to help control appearance when this menu is running as its own parent - for testing etc */
@@ -53,8 +53,6 @@
 			<div id=divData ></div>
 		</p>
 
-
-
 	</div>
 
 
@@ -100,8 +98,6 @@
 	function init() {
 
 		title.innerHTML = document.title;
-
-
 
 		countries = countries.sort();
 
@@ -239,8 +235,6 @@
 
 		let data = [];
 
-//console.log( '', epwJson );
-
 		for ( let i = 0, hour; i < epwJson.hourlyData.length; i++ ) {
 
 			hour = epwJson.hourlyData[ i ];
@@ -293,6 +287,8 @@
 		'';
 
 
+// adapt to circumstance or delete
+
 		if ( parent.mainIframe ) {
 
 			parent.mainIframe.contentWindow.parameters = {
@@ -305,7 +301,7 @@
 
 			}
 
-			parent.mainIframe.contentWindow.drawMesh( arr );
+			parent.mainIframe.contentWindow.updateScene( arr );
 
 		}
 

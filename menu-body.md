@@ -14,15 +14,16 @@ IBPSA 2017 Related
 
 ### [EPW JSON Three.js]( #epw-json-threejs/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-threejs/index.html )
 
-### [EPW Data Parser]( #epw-parser/README.md "A fun fail" ) [&#x1F517;]( epw-parser/epw-parser-r2.html )
+### [EPW JSON Parser]( #epw-json-parser/README.md "A fun fail" ) [&#x1F517;]( epw-json-parser/epw-parser-r2.html )
 
-### [EPW 3D]( #epw-3d/README.md "Watch time fly" ) [&#x1F517;]( epw-3d/index.html )
-
-### [Analemma 3D]( #analemma3-3d/README.md ) [&#x1F517;]( analemma3-3d/index.html )
-
-### [Room Builder]( #room-builder/README.md ) [&#x1F517;]( room-builder/index.html )
+### [EPW JSON 3D]( #epw-json-3d/README.md "Watch time fly" ) [&#x1F517;]( epw-json-3d/index.html )
 
 ***
 
-### [About]( #about.md )
+### [Analemma 3D]( #analemma3-3d/README.md ) [&#x1F517;]( analemma3-3d/index.html )
+
+<!--
+### [Room Builder]( #room-builder/README.md ) [&#x1F517;]( room-builder/index.html )
+-->
+
 
