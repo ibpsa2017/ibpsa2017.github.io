@@ -200,7 +200,7 @@
 			mesh.position.set( 0.03 * i - 120, 5 * hour[ 0 ], 5 * hour[ 1 ] + 0 );
 			mesh.scale.set( 1, 1 + 0.01 * hour[ 2 ], 1 + 0.01 * hour[ windSpeed - 1 ] );
 			mesh.rotation.x = hour[ windDir - 1 ] * Math.PI / 180;
-if ( i < 10 ) console.log( '', hour[ windDir - 1 ], mesh.rotation.x  );
+//if ( i < 10 ) console.log( '', hour[ windDir - 1 ], mesh.rotation.x  );
 //			mesh.castShadow = true;
 //			mesh.receiveShadow = true;
 			items.add( mesh );
@@ -212,8 +212,6 @@ if ( i < 10 ) console.log( '', hour[ windDir - 1 ], mesh.rotation.x  );
 			mesh.add( edges ); // add wireframe as a child of the parent mesh
 */
 		}
-
-
 
 		return items;
 
@@ -249,8 +247,6 @@ if ( i < 10 ) console.log( '', hour[ windDir - 1 ], mesh.rotation.x  );
 		raycaster.setFromCamera( mouse, camera );
 
 		// calculate objects intersecting the picking ray
-
-		if ( !items ) { return; }
 
 		var intersects = raycaster.intersectObjects( items.children );
 
@@ -375,6 +371,8 @@ if ( i < 10 ) console.log( '', hour[ windDir - 1 ], mesh.rotation.x  );
 	function onDocumentMouseMove( event ) {
 
 		var raycaster, intersects;
+
+		if ( !items || !items.children ) { return; }
 
 		event.preventDefault();
 

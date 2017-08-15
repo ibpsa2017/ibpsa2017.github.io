@@ -10,7 +10,7 @@ IBPSA 2017 Related
 
 ### [EPW Read Me]( #readme-epw.md )
 
-### [EPW JSON Basic]( #epw-json-basic/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-basic/epw-json-basic-cors-anywhere.html )
+### [EPW JSON Basic]( #epw-json-basic/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-basic/epw-json-basic.html )
 
 ### [EPW JSON Three.js]( #epw-json-threejs/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-threejs/index.html )
 

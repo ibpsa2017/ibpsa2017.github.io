@@ -11,7 +11,7 @@
 -->
 <meta name=description content="an unofficial site created by and for Building Simulation 2017 conference attendees." >
 <meta name=keywords content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name=date content="2017-08-04" >
+<meta name=date content="2017-08-14" >
 <style id="foo" >
 
 /* items mostly in tag/class/id then alphabetical order */
@@ -29,14 +29,17 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 .mainIframe { overflow: hidden; }
 
-.menu { height: 100%; overflow: auto; }
+/* .menu { height: 100%; overflow: auto; } */
+.menuSub h2, .menuSub h3, .menuSub h4, .menuSub p { margin: 10px 0 0 0; }
 .menuSub a { text-decoration: none; }
 .menuSub a:hover, .menuSub a:focus{ color: #f1f1f1; }
 
-.menu h2, .menu h3, .menu h4, .menu p, .menu iframe { color: #555; }
+/* .menu h2, .menu h3, .menu h4, .menu p, .menu iframe { color: #555; } */
 
-
-#butEditFile { background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px; vertical-align: middle; z-index: 1; }
+#butEditFile { 
+	background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px; 
+	vertical-align: middle; z-index: 1; 
+}
 
 #butEditFile:hover { cursor: pointer; opacity: 1; }
 
@@ -55,10 +58,12 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 #menu {
 	background-color: lightgray; box-sizing: border-box; height: 100%; left: 0; overflow: auto;
-	position: fixed; top: 0; transition: 0.5s; width: 250px; z-index: 1;
+	padding: 0 5px 0 15px; position: fixed; top: 0; transition: 0.5s; width: 250px; z-index: 1;
 }
 
-#menuHead, #menuBody, #menuFoot { border: 0px red solid; margin: 0; padding: 0 0 0 15px;/* overflow: auto; */ }
+/*
+#menuHead, #menuBody, #menuFoot { border: 0px red solid; margin: 0; /* overflow: auto; */ }
+*/
 
 
 
@@ -173,9 +178,15 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		if ( !url ) {
 
-			url = 'README.md';
+//			url = 'README.md';
+//			requestFile( url, mainContents );
 
-			requestFile( url, mainContents );
+
+			url = 'epw-json-threejs.html';
+
+			main.innerHTML = '<iframe id=mainIframe class=ifr src=' + url + ' ></iframe>';
+
+			main.style.overflow = 'hidden';
 
 		} else if ( url.startsWith( 'menu' ) ) {
 

@@ -15,10 +15,15 @@
 
 Simple user interface tool to help you select a location and gather its EPW data hosted remotely.
 
+## Issue
+
+* 2017-08-14 ~ Incorrect field data being read when you select a field to display
+
 
 ## Todo
 
 * 2017-08-14 ~ Switch from countrydata.js to countrydata.json
+
 
 
 ## Links of Interest

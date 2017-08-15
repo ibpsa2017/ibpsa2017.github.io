@@ -32,36 +32,33 @@
 
 // http://www.eco-envolventes.net/tools/170614a/3dChart1.html
 
-
 	var legendColors = [
 
-		[ 94, 79, 162 ],
-		[ 74, 108, 174 ],
-		[ 66, 136, 181 ],
-		[ 78, 164, 176 ],
-		[ 105, 189, 169 ],
-		[ 137, 207, 165 ],
-		[ 169, 221, 162 ],
-		[ 200, 233, 159 ],
-		[ 224, 243, 161 ],
-		[ 241, 249, 171 ],
-		[ 251, 248, 176 ],
-		[ 254, 238, 163 ],
-		[ 254, 221, 141 ],
-		[ 253, 198, 118 ],
-		[ 252, 172, 99 ],
-		[ 248, 142, 83 ],
-		[ 240, 112, 74 ],
-		[ 28, 86, 73 ],
-		[ 185, 31, 72 ],
-		[ 158, 1, 66 ],
+			[ 94, 79, 162 ],
+			[ 74, 108, 174 ],
+			[ 66, 136, 181 ],
+			[ 78, 164, 176 ],
+			[ 105, 189, 169 ],
+			[ 137, 207, 165 ],
+			[ 169, 221, 162 ],
+			[ 200, 233, 159 ],
+			[ 224, 243, 161 ],
+			[ 241, 249, 171 ],
+			[ 251, 248, 176 ],
+			[ 254, 238, 163 ],
+			[ 254, 221, 141 ],
+			[ 253, 198, 118 ],
+			[ 252, 172, 99 ],
+			[ 248, 142, 83 ],
+			[ 240, 112, 74 ],
+			[ 28, 86, 73 ],
+			[ 185, 31, 72 ],
+			[ 158, 1, 66 ],
 
 	];
 
 
-	let epwJson;
-
-//	var parameters = {};
+	var parameters = {};
 
 	var raycaster, mouse;
 	var intersected;
@@ -107,19 +104,17 @@
 
 // We are in an Iframe. The action starts when the parent window tells us to do something
 
-	function updateScene( heights, json ) {
-
-		epwJson = json;
+	function drawMesh( heights ) {
 
 		let geometryBuffer, material, index;
 		let difference, offset, colors, color, arr;
 
-		difference = epwJson.parameters.field.max - epwJson.parameters.field.min;
-		offset = epwJson.parameters.field.min < 0 ? -epwJson.parameters.field.min : 0;
+		difference = parameters.field.max - parameters.field.min;
+		offset = parameters.field.min < 0 ? -parameters.field.min : 0;
 
 		geometryBuffer = new THREE.PlaneBufferGeometry( 200, 500, 23, 364 );
 		geometryBuffer.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
-		material = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors, side: 2 } );
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors, side:2 } );
 
 		index = 0;
 
@@ -200,8 +195,6 @@
 
 		var raycaster, intersects;
 
-		if ( !mesh ) { return; }
-
 		event.preventDefault();
 
 		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
@@ -261,7 +254,7 @@
 			'Hours: ' + hours + b +
 			'Time: ' + X + b +
 			'Day: ' + Z + b +
-			geometryHeights[ hours ] + ' ' + epwJson.parameters.field.units +
+			geometryHeights[ hours ] + ' ' +parameters.field.units +
 
 		'';
 
