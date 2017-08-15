@@ -1,3 +1,7 @@
+<p style=margin:0;padding:0; ><a href="https://ibpsa2017.github.io/" target="_blank">ibpsa2017</a></p>
+
+
+## [EPW 3D]( index.html )
 
 Play back a year of weather statistics
 
@@ -7,5 +11,9 @@ Play back a year of weather statistics
 
 ***
 
-<iframe id = "iframeMenu" src = "mnu-epw-json-3d.html"  width = "100%" frameBorder = "0" ></iframe>
+<iframe id = "ifrDateTime" src = "mnu-epw-3d.html"  width = "100%" height = "750" frameBorder = "0" ></iframe>
 
+
+***
+
+<h1 style=text-align:center; > &#x2766; </h1>

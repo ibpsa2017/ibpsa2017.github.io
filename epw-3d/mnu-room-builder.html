@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; max-width: 300px; } 
+
+	button { background-color: #ccc; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+<script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
+
+<p id=epwContents ></p>
+
+<p id=toggles ></p>
+<p>
+<button onclick="initSunPath();" >Draw Sun Path</button>
+</p>
+
+Month <output id=outMonth for="inpMonth" ></output>
+<input type="range" id="inpMonth" min=0 max=11  >
+
+Date <output id=outDate  for="inpDate" ></output>
+<input type="range" id="inpDate" min=0 max=31 >
+
+Hour <output id=outHour for="inpHour" ></output>
+<input type="range" id="inpHour" min=0 max=24 >
+
+<script>
+
+</script>
+</body>
+</html>

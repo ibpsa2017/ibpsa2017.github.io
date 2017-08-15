@@ -11,7 +11,7 @@
 -->
 <meta name=description content="an unofficial site created by and for Building Simulation 2017 conference attendees." >
 <meta name=keywords content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name=date content="2017-08-14" >
+<meta name=date content="2017-08-04" >
 <style id="foo" >
 
 /* items mostly in tag/class/id then alphabetical order */
@@ -23,23 +23,20 @@ a { color: crimson; }
 blockquote, pre { background-color: #eee; padding: 10px; }
 
 
-.center { border: 0px solid red; left: 0; margin: 0 auto; max-width: 800px; position: absolute; right: 0; }
+.center { border: 0px solid red; left: 0; margin: 0 auto; max-width: 600px; position: absolute; right: 0; }
 
 .ifr { border-width: 0; height: 100%; margin: 0; width: 100%; }
 
 .mainIframe { overflow: hidden; }
 
-/* .menu { height: 100%; overflow: auto; } */
-.menuSub h2, .menuSub h3, .menuSub h4, .menuSub p { margin: 10px 0 0 0; }
+.menu { height: 100%; overflow: auto; }
 .menuSub a { text-decoration: none; }
 .menuSub a:hover, .menuSub a:focus{ color: #f1f1f1; }
 
-/* .menu h2, .menu h3, .menu h4, .menu p, .menu iframe { color: #555; } */
+.menu h2, .menu h3, .menu h4, .menu p, .menu iframe { color: #555; }
 
-#butEditFile { 
-	background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px; 
-	vertical-align: middle; z-index: 1; 
-}
+
+#butEditFile { background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px; vertical-align: middle; z-index: 1; }
 
 #butEditFile:hover { cursor: pointer; opacity: 1; }
 
@@ -58,12 +55,10 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 #menu {
 	background-color: lightgray; box-sizing: border-box; height: 100%; left: 0; overflow: auto;
-	padding: 0 5px 0 15px; position: fixed; top: 0; transition: 0.5s; width: 250px; z-index: 1;
+	position: fixed; top: 0; transition: 0.5s; width: 250px; z-index: 1;
 }
 
-/*
-#menuHead, #menuBody, #menuFoot { border: 0px red solid; margin: 0; /* overflow: auto; */ }
-*/
+#menuHead, #menuBody, #menuFoot { border: 0px red solid; margin: 0; padding: 0 0 0 15px;/* overflow: auto; */ }
 
 
 
@@ -142,19 +137,17 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		showdown.setFlavor( 'github' );
 
-		requestFile( 'menu-head.md', menuHead );
+//		requestFile( 'menu-head.md', menuHead );
 
 		requestFile( 'menu-body.md', menuBody );
 
-		requestFile( 'menu-foot.md', menuFoot );
+//		requestFile( 'menu-foot.md', menuFoot );
 
 		onHashChange();
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
-//		window.addEventListener( 'orientationchange', function() { window.location.reload(); } );
-
-		window.addEventListener( 'orientationchange', onWindowResize, false  );
+		window.addEventListener( 'orientationchange', function() { window.location.reload(); } );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 
@@ -176,14 +169,12 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		document.title = title ? title + ' - ' + projectName : 'README - ' + projectName;
 
+
 		if ( !url ) {
 
-//			url = 'README.md';
-//			requestFile( url, mainContents );
+			url = 'README.md';
 
-			url = 'epw-json-3d.html';
-			main.innerHTML = '<iframe id=mainIframe class=ifr src=' + url + ' ></iframe>';
-			main.style.overflow = 'hidden';
+			requestFile( url, mainContents );
 
 		} else if ( url.startsWith( 'menu' ) ) {
 
@@ -222,18 +213,14 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 	function onWindowResize(){
 
-		const ifr = document.querySelector( 'iframe' );
-
 		if ( window.innerWidth < 1000 ) {
 
 			butEditFile.style.display = 'none';
-			if ( ifr ) { ifr.style.display = 'none'; }
 			hamburger.innerHTML = '&#9776;';
 
 		} else {
 
 			butEditFile.style.display = '';
-			if ( ifr ) { ifr.style.display = ''; }
 			hamburger.innerHTML = '&#9776; slide';
 
 		}
