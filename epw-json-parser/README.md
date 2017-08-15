@@ -13,6 +13,11 @@
 
 The challenge: Can you show 365 x 24 x 8 items of weather data all at once in a readable manner?
 
+As bad as this fail is, it's still the most promising of all the demos here. It shows the ways of visualizing weather data in entirely new ways.
+
+
+
+
 ## About
 From: https://energyplus.net/weather/simulation
 
@@ -60,6 +65,12 @@ Theo
 * https://www.nrel.gov/analysis/sam/help/html-php/index.html?weather_format.htm
 
 
+
+## To Do
+
+* 2017-08-15 ~ Allow you to select which variables are to be displayed and on which access
+
+
 ## Issues
 
 * Would it make sense to upload all the EPW files to GitHub so that can be accessed online?
@@ -67,6 +78,10 @@ Theo
 
 ## Change Log
 
+
+### 2017-08-15 ~ Theo
+
+* Beginning to work as desired.
 
 ### 2017-08-02 ~ 
 

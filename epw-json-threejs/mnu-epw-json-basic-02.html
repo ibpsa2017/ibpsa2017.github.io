@@ -4,7 +4,7 @@
 <meta charset = "utf-8" >
 <meta name = description content = "Basic EPW JSON template. Select location, request file, gather data." >
 <meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = date content = "2017-08-15" >
+<meta name = date content = "2017-08-14" >
 <title>EPW JSON Basic</title>
 <style>
 
@@ -21,16 +21,17 @@
 </style>
 </head>
 <body>
+<script src = "../data/countrydata.js" ></script>
 
 	<div id = "menu" >
 
 		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
 
-		<div id = "info" > &nbsp; </div>
+		<div id = "info" ></div>
 
 		<p>
 			Country:<br>
-			<select id="selCountry" size=10 ></select>
+			<select id="selCountry" size=1 ></select>
 		</p>
 
 		<p>
@@ -40,7 +41,7 @@
 
 		<p>
 			<div id=divDataFields >Data fields:</div>
-			<select id="selField" size=10 ></select>
+			<select id="selField" size=16 ></select>
 		</p>
 
 		<p>
@@ -57,23 +58,18 @@
 
 <script>
 
+	let epwJson; //will hold data from EPW JSON file
 
-	const urlEPW = 'http://www.eco-envolventes.net/data/json/allEPW/';
-	const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+	const corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
-	let countryData;; // will hold data from countrydata.json
-
-	let epwJson; // will hold data from EPW JSON file
-
-	let hourlyDataFields;
-
+	let fields;
 
 	init();
 
 
 	function init() {
 
-		requestFileCountryData();
+		countries = countries.sort();
 
 		selCountry.onchange = getCities;
 
@@ -81,27 +77,7 @@
 
 		selField.onchange = getFieldData;
 
-/*
-
-		if ( parent.main && !parent.mainIframe ) {
-
-// get src url from parent??
-
-			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="epw-json-parser.html" ></iframe>';
-
-			parent.iframeMenu.style.height = document.body.scrollHeight + 'px';
-			document.body.style.overflow = 'hidden';
-			header.style.display = 'none';
-
-			parent.icw = parent.mainIframe.contentWindow; // use 'icw' in console.log
-
-		} else {
-
-			title.innerHTML = document.title;
-
-		}
-
-*/
+		getCountry();
 
 		parent.icw = parent.mainIframe.contentWindow;
 		parent.iframeMenu.style.height = document.body.scrollHeight + 'px';
@@ -112,35 +88,13 @@
 
 
 
-	function requestFileCountryData() {
-
-		let url;
-		url = urlCORS + urlEPW + 'countrydata.json' ;
-
-		requestFile ( url, callbackCountryData );
-
-	}
-
-
-
-	function callbackCountryData( xhr ) {
-
-		countries = JSON.parse( xhr.target.response ).countries;
-
-//console.log( 'countries', countries );
-
-		getCountries();
-
-	}
-
-
-	function getCountries() {
+	function getCountry() {
 
 		for ( let i = 0; i < countries.length; i++ ) {
 
 			if ( countries[ i ] ) {
 
-				selCountry.innerHTML += '<option>' + countries[ i ].country + '</option>';
+				selCountry.innerHTML += '<option>' + countries[ i ] + '</option>';
 
 			}
 
@@ -157,17 +111,11 @@
 
 	function getCities() {
 
-		let coutntry, cities;
+		let cities;
 
-// for loop better? / more understandable?
+		cities = window[ selCountry.value ] ;
 
-		country = countries.find( function( item ) { return item.country === selCountry.value } );
-
-//console.log( 'country', country );
-
-		cities = country.cities ;
-
-//console.log( 'cities', cities );
+		cities = cities.sort();
 
 		selCity.innerHTML = '';  // the insides of a select element is a select tag is HTML
 
@@ -193,13 +141,15 @@
 
 		city = selCity.value;
 
-		fileName = encodeURI( country + '/' + country + '_' + city + '.json' );
+		fileName = encodeURI( 'http://www.eco-envolventes.net/data/json/allEPW/' + country + '/' + country + '_' + city + '.json' );
 
 //console.log( 'fileName', fileName );
 
-		url = urlCORS + urlEPW + fileName;
+		url = corsUrl + fileName;
 
 		requestFile( url, callbackEPW );
+
+		info.innerHTML = '&nbsp;';
 
 	}
 
@@ -207,14 +157,12 @@
 
 	function callbackEPW( xhr ) {
 
-		let field;
-
 		epwJson = JSON.parse( xhr.target.response );
 
 //console.log( 'epwJson', epwJson );
 
 		selField.innerHTML = '';
-		hourlyDataFields = [];
+		fields = [];
 
 		for ( let i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
 
@@ -223,11 +171,11 @@
 			if ( field.name === 'Zenith Luminance' ) { continue; } // field appears to have no data
 
 			selField.innerHTML += '<option>' + field.name + '</option>';
-			hourlyDataFields.push( field );
+			fields.push( field );
 
 		}
 
-		divDataFields.innerHTML = 'Hourly Data Fields (' + epwJson.hourlyDataFields.length + '):';
+		divDataFields.innerHTML = 'Data fields (' + epwJson.hourlyDataFields.length + '):';
 
 		selField.selectedIndex = 0;
 		selField.selectedIndex = Math.floor( Math.random() * selField.length );
@@ -281,7 +229,7 @@
 
 			selCity.value + b +
 			selField.value + b +
-			'Units: ' + hourlyDataFields[ selField.selectedIndex ].units + b +
+			'Units: ' + fields[ selField.selectedIndex ].units + b +
 			'Min: ' + min + b +
 			'Max: ' + max + b +
 			'Average: ' + avg.toFixed( 2 ) + b +
@@ -302,11 +250,11 @@
 				median: median,
 				max: max,
 				min: min,
-				field: hourlyDataFields[ selField.selectedIndex ]
+				field: fields[ selField.selectedIndex ]
 
 			}
 
-			parent.mainIframe.contentWindow.updateScene( epwJson, arr );
+			parent.mainIframe.contentWindow.updateScene( arr, epwJson );
 
 		}
 
