@@ -38,19 +38,25 @@
 			<select id="selCity" size=5 ></select>
 		</p>
 
-		<p>
-			<div id=divDataFields >Data fields:</div>
-			<select id="selField" size=10 ></select>
-		</p>
+		<details id=detDataFields open >
 
-		<p>
-			<div id=divCalculations ></div>
-		</p>
+			<summary>Weather Fields and Data</summary> 
 
-		<p>
-			Data:
-			<div id=divData ></div>
-		</p>
+			<p>
+				<div id=divDataFields >Data fields:</div>
+				<select id="selField" size=10 ></select>
+			</p>
+
+			<p>
+				<div id=divCalculations ></div>
+			</p>
+
+			<p>
+				Data:
+				<div id=divData ></div>
+			</p>
+
+		</details>
 
 	</div>
 
@@ -81,13 +87,8 @@
 
 		selField.onchange = getFieldData;
 
-/*
 
-		if ( parent.main && !parent.mainIframe ) {
-
-// get src url from parent??
-
-			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="epw-json-parser.html" ></iframe>';
+		if ( parent.main && parent.mainIframe ) {
 
 			parent.iframeMenu.style.height = document.body.scrollHeight + 'px';
 			document.body.style.overflow = 'hidden';
@@ -100,13 +101,6 @@
 			title.innerHTML = document.title;
 
 		}
-
-*/
-
-		parent.icw = parent.mainIframe.contentWindow;
-		parent.iframeMenu.style.height = document.body.scrollHeight + 'px';
-		document.body.style.overflow = 'hidden';
-		header.style.display = 'none';
 
 	}
 

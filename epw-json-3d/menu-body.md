@@ -7,5 +7,20 @@ Play back a year of weather statistics
 
 ***
 
-<iframe id = "iframeMenu" src = "mnu-epw-json-3d.html"  width = "100%" frameBorder = "0" ></iframe>
+<details open >
 
+<summary>Display the Weather</summary>
+
+<iframe id = "iframeMenu0" src = "mnu-epw-3d.html" width = "100%" height = "420" frameBorder = "0" ></iframe>
+
+
+</details>
+
+<details open >
+
+<summary>EPW Data</summary>
+
+<iframe id = "iframeMenu" src = "mnu-epw-json-basic.html"  width = "100%" frameBorder = "0" onload=iframeMenu.contentWindow.detDataFields.removeAttribute('open');
+></iframe>
+
+</details>

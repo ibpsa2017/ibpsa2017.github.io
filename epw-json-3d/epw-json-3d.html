@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
  -->
 
-<title>EPW 3D</title>
+<title>EPW JSON 3D</title>
 <meta name=description content="3D EPW in your browser - https://energyplus.net/weather" >
 <meta name=keywords content="MapBox,Google,Three.js,WebGL,JavaScript,HTML,CSS,GitHub,FOSS" >
 <meta name=date content="2017-08-03" >
@@ -103,8 +103,9 @@
 
 	function init() {
 
-		parent.projectName = 'Ladybug Web';
-		parent.document.title = 'EPW 3D';
+//		parent.projectName = 'Ladybug Web';
+//		parent.document.title = 'EPW 3D';
+
 
 		if ( parent.document.getElementById( 'foo' ) ) {
 
@@ -142,7 +143,20 @@
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
-		
+	}
+
+
+	function updateScene( json ) {
+
+		epwJson = json;
+
+//console.log( 'epwJson', epwJson );
+
+		latitude = epwJson.location.latitude;
+		longitude = epwJson.location.longitude;
+
+		location.hash = '^latitude^:^' + latitude + '^,^longitude^:^' + longitude + '^,^zoom^:^15^,^offsetUTC^:^0^';
+
 	}
 
 
@@ -322,14 +336,14 @@
 		var lights = new THREE.Object3D();
 		lights.name = 'lights';
 
-//		if ( !lightAmbient ) { 
+//		if ( !lightAmbient ) {
 
 			lightAmbient = new THREE.AmbientLight( 0x444444 );
 			lights.add( lightAmbient );
 
 //		}
 
-//		if ( !lightPointCamera ) { 
+//		if ( !lightPointCamera ) {
 
 			lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
 			camera.add( lightPointCamera );
@@ -338,7 +352,7 @@
 
 //		}
 
-//		if ( !lightDirectional ) { 
+//		if ( !lightDirectional ) {
 
 			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
 			lightDirectional.position.set( -size + 0.5 * groundSize, size, size + 0.5 * groundSize );
@@ -399,7 +413,7 @@
 
 	function getHeightMapData( map ) {
 
-//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox 
+//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox
 
 		let geometry, material;
 		let heightmapCanvas, heightmapContext;
@@ -594,15 +608,23 @@ alert( 'error', error );
 
 		try {
 
+			if ( response ) {
+
 			json = JSON.parse( response );
 			parseGeoJSON( json );
+
+			} else {
+
+				setCamera();
+
+			}
 
 		}
 
 		catch ( e ) {
 
 console.log( 'callbackGeoJSON error', e );
-
+console.log( 'callbackGeoJSON response', response );
 			setCamera();
 
 			return;
@@ -642,7 +664,7 @@ console.log( 'callbackGeoJSON error', e );
 
 // console.log( 'json', i, json.features[ i ].properties );
 
-			height = height ? height : 5;
+			height = height ? height : 15;
 
 /*
 			roof = json.features[ i ].properties.roofShape;
@@ -668,7 +690,7 @@ console.log( 'json', i, json.features[ i ] );
 
 				}
 
-				height = hasHeights ? height : 8;
+				height = hasHeights ? height : 100;
 
 				structure = drawShape( vertices, height );
 
@@ -759,7 +781,8 @@ console.log( 'error', e, shape );
 
 		if ( intersects.length ) {
 
-			structure.position.y = intersects[ 0 ].point.y;
+			structure.userData.positionY = structure.position.y = intersects[ 0 ].point.y;
+
 /*
 				structure.updateMatrixWorld();
 				structure.geometry.computeBoundingSphere();
@@ -768,7 +791,7 @@ console.log( 'error', e, shape );
 				structure.add( placard );
 */
 
-		} else if ( !parameters.structuresArray.length ) {
+		} else if ( parameters.structuresArray.length === 0 ) {
 
 //console.timeEnd( 'timer 1' );
 
