@@ -3,7 +3,7 @@
 
 # [ibpsa2017.github.io Read Me]( https://ibpsa2017.github.io ) 
 
-<iframe src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px onload=this.style.display=window.innerWidth<1000?"none":"";  ></iframe>
+<iframe class="iframeReadMe" src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px ></iframe>
 
 _Script of the moment: [EPW 3D]( https://ibpsa2017.github.io/epw-3d/index.html ) showing downtown San Francisco with Hyatt Embarcadero at center. Click 'Play the Year' to view a year of EPW data_
 

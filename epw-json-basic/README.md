@@ -4,9 +4,9 @@
 ### [EPW JSON Basic Read Me]( #README.md )
 
 
-<iframe src=https://ibpsa2017.github.io/epw-json-basic/epw-json-basic.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=https://ibpsa2017.github.io/epw-json-basic/mnu-epw-json-basic.html width=100% height=600px ></iframe>
 
-## Full Screen: [EPW JSON Basic]( https://ibpsa2017.github.io/epw-json-basic/epw-json-basic.html )
+## Full Screen: [EPW JSON Basic]( https://ibpsa2017.github.io/mnu-epw-json-basic/epw-json-basic.html )
 
 
 ## Concept
