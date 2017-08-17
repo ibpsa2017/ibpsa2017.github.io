@@ -60,7 +60,7 @@ Click to start & stop:
 
 	let fileName;
 //	fileName = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/data/SF_example_data.csv';
-	fileName = '../data/SF_example_data.csv';
+//	fileName = '../data/SF_example_data.csv';
 
 	var pmc;
 	var THREE;
@@ -80,6 +80,9 @@ Click to start & stop:
 	let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
 	let indexEPW;
+	let windDir = 0;
+	let windSpeed = 0;
+	let dirNorRad = 0;
 
 	let playTheYear = false;
 
@@ -88,31 +91,26 @@ Click to start & stop:
 
 	function init() {
 
-//		if ( parent.main && !parent.mainIframe ) {
-
-//			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="epw-3d.html" ></iframe>';
-
-//		}
-
 		inpMonth.onclick = initSunPath;
 		inpDate.onclick = initSunPath;
 		inpHour.onclick = initSunPath;
 
-		requestFile( fileName, callbackEPW );
+//		requestFile( fileName, callbackEPW );
 
 		window.addEventListener( 'close', function() { playTheYear = false; }, false );
 
 //		parent.iframeMenu0.style.height = document.body.scrollHeight + 'px';
-//console.log( 'document.body.scrollHeight', document.body.scrollHeight );
+
 	}
 
 
 
 	function initSunPath() {
 
-		if ( !parent.mainIframe ) { parent.location = 'index.html'; return; }
+		if ( !parent.ifrMain ) { parent.location = 'index.html'; return; }
 
-		pmc = parent.mainIframe.contentWindow;
+
+		pmc = parent.ifrMain.contentWindow;
 		THREE = pmc.THREE;
 		scene = pmc.scene
 		controls = pmc.controls;
@@ -123,6 +121,7 @@ Click to start & stop:
 		object3D = pmc.object3D;
 		lights = pmc.lights;
 		ground = pmc.ground;
+		epwJson = pmc.epwJson;
 
 //		scene.fog = new THREE.FogExp2( 0xaaaaaa, 10 );
 //console.log( '', scene.fog );
@@ -147,16 +146,14 @@ Click to start & stop:
 
 		if ( !analemma ) {
 
-		drawAnalemma();
+			drawAnalemma();
 
-		initSunAndLight();
+			initSunAndLight();
 
-		pointer = drawPointer3D();
-		pointer.position.set( 50, 10, 0 );
-		
-		scene.add( pointer );
-
-//console.log( '', pointer );
+			pointer = drawPointer3D();
+			pointer.position.set( 50, 10, 0 );
+			
+			scene.add( pointer );
 
 		}
 
@@ -173,6 +170,17 @@ Click to start & stop:
 
 
 		chkRotate.onclick = toggleRotation;
+
+		offset = 0;
+		for ( var i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
+
+			field = epwJson.hourlyDataFields[ i ];
+			offset =  field.name === 'Zenith Luminance' ? -1 : offset;
+			dirNorRad = field.name === 'Direct Normal Radiation' ? i : dirNorRad;
+			windDir = field.name === 'Wind Direction' ? i + offset: windDir;
+			windSpeed = field.name === 'Wind Speed' ? i + offset : windSpeed;
+
+		}
 
 	}
 
@@ -195,7 +203,6 @@ Click to start & stop:
 
 		colors = [ 'bisque', 'deeppink', 'sienna', 'darkorange', 'indigo', 'lime',
 		'purple', 'honeydew', 'coral', 'gold', 'gray', 'maroon' ];
-
 
 		analemma = new THREE.Object3D();
 
@@ -330,7 +337,7 @@ Click to start & stop:
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -30 ) );
 		material = new THREE.MeshNormalMaterial( { opacity: 0.5, transparent: true } );
 		mesh = new THREE.Mesh( geometry, material );
-mesh.scale.multiplyScalar( 0.25 );
+		mesh.scale.multiplyScalar( 0.25 );
 
 		return mesh;
 
@@ -353,53 +360,72 @@ mesh.scale.multiplyScalar( 0.25 );
 
 		}
 
-		indexEPW = p.hour + 24 * ( p.date + dayCount );
+		hour = p.hour + 24 * ( p.date + dayCount );
 
-		data = epw[ indexEPW ];
+		data = epwJson.hourlyData[ hour ];
 
 		if ( !data ) { return; }
 
 		epwContents.innerHTML =
 
-			'<h3>Item: ' + indexEPW + '</h3>' +
-			'Date: ' + data[ 0 ] + b +
-			'Time: ' + data[ 1 ] + b +
-			'Dry Bulb Temperature {C}: ' + data[ 2 ] + b +
-			'Dew Point Temperature {C}: ' + data[ 3 ] + b +
-			'Relative Humidity {%}: ' + data[ 4 ] + b +
-			'Direct Normal Radiation {Wh/m2}: ' + b + data[ 5 ] + b +
-			'Wind Direction {deg}: ' + b + data[ 6 ] + b +
-			'Wind Speed {m/s}: ' + data[ 7 ] + b +
+			'<h3>Hour: ' + hour + '</h3>' +
+			'Date: ' + p.date + '/' + p.month + b +
+			'Time: ' + p.hour + b +
+			'Dry Bulb Temperature {C}: ' + data[ 0 ] + b +
+			'Dew Point Temperature {C}: ' + data[ 1 ] + b +
+			'Relative Humidity {%}: ' + data[ 2 ] + b +
+			'Direct Normal Radiation {Wh/m2}: ' + b + data[ dirNorRad ] + b +
+			'Wind Direction {deg}: ' + b + data[ windDir ] + b +
+			'Wind Speed {m/s}: ' + data[ windSpeed ] + b +
 
 		'';
 
-		updateScene();
+		updateScene( data );
 
 	}
 
 
 
-	function updateScene(){
+	function updateScene( data ){
 
-		let data = epw[ indexEPW ];
+		let geometry, material, userData, p;
+		let matrix;
 
-		lightDirectional.intensity  = data[ 5 ] / 300;
+//		lightDirectional.intensity  = data[ 5 ] / 300;
 
 //console.log( 'intensity', lightDirectional.intensity );
 
-/*
-		let geometry, material;
+		dir = - data[ windDir ] * Math.PI / 180;
+		pmc.debug.innerHTML = 'dir ' + data[ windDir ] ;
 
-		windDir = data[ 6 ] * Math.PI / 180;
+
+		x = 0.5;
+		y = 0.5;
+		z = 0;
+
+		x = Math.sin( dir );
+		y = Math.cos( dir );
+		matrix = new THREE.Matrix4();
+		matrix.makeShear( x, y, z );
+
 
 		for ( var i = 0; i < structures.children.length; i++ ) {
 
-			structure = structures.children[ i ];
-console.log( 'structure', structure );
-			geometry = structure.geometry.clone();
+			var structure = structures.children[ i ];
 
+//console.log( 'structure', structure );
 
-			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( windDir ) );
+			userData = structure.userData;
+			p = userData.position;
+			geometry = structure.userData.geometryOriginal.clone();
+			geometry.center();
+//			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( windDir ) );
+
+			matrix = new THREE.Matrix4();
+			matrix.makeShear( x, y, z );
+
+			geometry.applyMatrix( matrix );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( p.x, p.y, p.z ) );
 
 			material =  structure.material.clone();
 
@@ -407,26 +433,23 @@ console.log( 'structure', structure );
 			structure = new THREE.Mesh( geometry, material );
 			structure.castShadow = true;
 			structure.receiveShadow = true;
+			structure.userData = userData;
 			structures.add( structure );
 
 		} 
-*/
-
-		structures.scale.y = 0.01 + data[ 2 ] / 10;
 
 
+//		structures.scale.y = 0.01 + data[ 2 ] / 10;
 
-
-
-		scene.fog.far = 150 + parseInt( data[ 4 ], 10 );
+		scene.fog.far = 150 + parseInt( data[ 2 ], 10 );
 
 // console.log( '', scene.fog.far, data[ 4 ] );
 
-		c = parseInt( data[ 4 ], 10 ) / 220;
+		c = parseInt( data[ 1 ], 10 ) / 220;
 		ground.material.emissive = new THREE.Color( c, c, c );
 
-		pointer.rotation.y = data[ 6 ] * Math.PI / 180;
-		pointer.scale.z = 0.0001 + 0.05 * data[ 7 ];
+		pointer.rotation.y = dir;
+		pointer.scale.z = 0.0001 + 0.05 * data[ windSpeed ];
 //		pointer.geometry = pointer.geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 + 0.03 * data[ 7 ] ) );
 
 	}
@@ -444,7 +467,8 @@ console.log( 'structure', structure );
 
 	function play() {
 
-		requestAnimationFrame( play );
+		setTimeout( play, 1000 );
+//		requestAnimationFrame( play );
 		if ( playTheYear ) { goToNextHour(); }
 
 	}
@@ -493,6 +517,7 @@ console.log( 'structure', structure );
 //console.log( '', parameters );
 
 		setSunPosition();
+
 		getEPW();
 
 	}
@@ -541,6 +566,7 @@ console.log( 'structure', structure );
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
 
 		setSunPosition();
+
 		getEPW();
 
 // console.log( '', parent.mainIframe.contentWindow.parameters.hours );

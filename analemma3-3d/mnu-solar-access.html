@@ -77,9 +77,9 @@ Click the buttons in analemma, range, access order. There is an error in the log
 
 	function init() {
 
-		if ( !parent.mainIframe ) {
+		if ( !parent.ifrMain ) {
 
-			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="analemma3-3d.html" ></iframe>';
+			parent.main.innerHTML = '<iframe id=ifrMain class=iframeMain src="analemma3-3d.html" ></iframe>';
 
 		}
 
@@ -89,13 +89,13 @@ Click the buttons in analemma, range, access order. There is an error in the log
 
 	function initSolarAccess() {
 
-		if ( !parent.mainIframe ) {
+		if ( !parent.ifrMain ) {
 
-			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="analemma3-3d.html" ></iframe>';
+			parent.main.innerHTML = '<iframe id=ifrMain class=ifr src="analemma3-3d.html" ></iframe>';
 
 		}
 
-		pmc = parent.mainIframe.contentWindow;
+		pmc = parent.ifrMain.contentWindow;
 		THREE = pmc.THREE;
 		scene = pmc.scene
 		camera = pmc.camera;
@@ -490,7 +490,7 @@ Click the buttons in analemma, range, access order. There is an error in the log
 
 	function setMonth() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
 		parameters.month = parseInt( inpMonth.value, 10 );
 
@@ -498,7 +498,7 @@ Click the buttons in analemma, range, access order. There is an error in the log
 
 		drawSunRange();
 
-// console.log( '', parent.mainIframe.contentWindow.parameters.month );
+// console.log( '', parent.ifrMain.contentWindow.parameters.month );
 
 	}
 
@@ -506,13 +506,13 @@ Click the buttons in analemma, range, access order. There is an error in the log
 
 	function setDate() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
 
 		outDate.value = parameters.date = parseInt( inpDate.value, 10 );
 
 		drawSunRange();
 
-// console.log( '', parent.mainIframe.contentWindow.parameters.date );
+// console.log( '', parent.ifrMain.contentWindow.parameters.date );
 
 	}
 

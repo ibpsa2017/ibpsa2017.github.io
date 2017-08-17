@@ -57,13 +57,13 @@
 		let pp;
 		let heightScale = parseFloat( that.value );
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
 
-		pp = parent.mainIframe.contentWindow.parameters;
+		pp = parent.ifrMain.contentWindow.parameters;
 
 		pp.heightScale = heightScale;
 
-		parent.mainIframe.contentWindow.drawTerrain();
+		parent.ifrMain.contentWindow.drawTerrain();
 
 	}
 
@@ -74,12 +74,12 @@
 
 		let zoom = parseInt( that.innerText, 10 );
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-		pp = parent.mainIframe.contentWindow.parameters;
+		pp = parent.ifrMain.contentWindow.parameters;
 
-		hash = '^latitude^:^' + pp.latitude + '^,^longitude^:^' + pp.longitude + '^,^zoom^:^' + zoom + '^';
-		parent.mainIframe.contentWindow.location.hash = hash;
+		hash = 'latitude:' + pp.latitude + ',longitude:' + pp.longitude + ',zoom:' + zoom + '';
+		parent.ifrMain.contentWindow.location.hash = hash;
 
 		parent.info.innerHTML += 'zoom: ' + zoom + '<br>';
 
@@ -97,15 +97,15 @@
 
 		let pp, newLon, hash;
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-		pp = parent.mainIframe.contentWindow.parameters;
+		pp = parent.ifrMain.contentWindow.parameters;
 		newLon = pp.longitude + pp.lonDelta;
 
 		if ( newLon < 180 ) {
 
-			hash = '^latitude^:^' + pp.latitude + '^,^longitude^:^' + newLon + '^,^zoom^:^' + pp.zoom + '^';
-			parent.mainIframe.contentWindow.location.hash = hash;
+			hash = 'latitude:' + pp.latitude + ',longitude:' + newLon + ',zoom:' + pp.zoom + '';
+			parent.ifrMain.contentWindow.location.hash = hash;
 
 			parent.info.innerHTML += 'longitude: ' + newLon.toFixed( 4 ) + '<br>';
 
@@ -120,17 +120,17 @@
 
 		let pp, newLon, hash;
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-		pp = parent.mainIframe.contentWindow.parameters;
+		pp = parent.ifrMain.contentWindow.parameters;
 		newLon = pp.longitude - pp.lonDelta;
 
 		if ( newLon > -180 ) {
 
-			hash = '^latitude^:^' + pp.latitude + '^,^longitude^:^' + newLon + '^,' +
-				'^zoom^:^' + pp.zoom + '^,^offsetUTC^:^' + pp.offsetUTC + '^';
+			hash = 'latitude:' + pp.latitude + ',longitude:' + newLon + ',' +
+				'zoom:' + pp.zoom + ',offsetUTC:' + pp.offsetUTC + '';
 
-			parent.mainIframe.contentWindow.location.hash = hash;
+			parent.ifrMain.contentWindow.location.hash = hash;
 
 			parent.info.innerHTML += 'longitude: ' + newLon.toFixed( 4 ) + '<br>';
 
@@ -145,16 +145,16 @@
 
 		let pp, newLat, hash;
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-		pp = parent.mainIframe.contentWindow.parameters;
+		pp = parent.ifrMain.contentWindow.parameters;
 		newLat = pp.latitude + pp.latDelta;
 
 
 		if ( newLat < 90 ) {
 
-			hash = '^latitude^:^' + newLat + '^,^longitude^:^' + pp.longitude + '^,^zoom^:^' + pp.zoom + '^';
-			parent.mainIframe.contentWindow.location.hash = hash;
+			hash = 'latitude:' + newLat + ',longitude:' + pp.longitude + ',zoom:' + pp.zoom + '';
+			parent.ifrMain.contentWindow.location.hash = hash;
 
 			parent.info.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
 
@@ -169,15 +169,15 @@
 
 		let pp, newLat, hash;
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-		pp = parent.mainIframe.contentWindow.parameters;
+		pp = parent.ifrMain.contentWindow.parameters;
 		newLat = pp.latitude - pp.latDelta;
 
 		if ( newLat > -90 ) {
 
-			hash = '^latitude^:^' + newLat + '^,^longitude^:^' + pp.longitude + '^,^zoom^:^' + pp.zoom + '^';
-			parent.mainIframe.contentWindow.location.hash = hash;
+			hash = 'latitude:' + newLat + ',longitude:' + pp.longitude + ',zoom:' + pp.zoom + '';
+			parent.ifrMain.contentWindow.location.hash = hash;
 
 			parent.info.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
 

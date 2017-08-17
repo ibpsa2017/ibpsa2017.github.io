@@ -73,9 +73,9 @@ Ambient Light Intensity <output id=outAmbientIntensity for="inpAmbientIntensity"
 
 	function init() {
 
-		if ( !parent.mainIframe ) {
+		if ( !parent.ifrMain ) {
 
-			parent.main.innerHTML = '<iframe id=mainIframe class=ifr src="analemma3-3d.html" ></iframe>';
+			parent.main.innerHTML = '<iframe id=ifrMain class=iframeMain src="analemma3-3d.html" ></iframe>';
 
 		}
 
@@ -93,7 +93,7 @@ Ambient Light Intensity <output id=outAmbientIntensity for="inpAmbientIntensity"
 
 	function initSunRange() {
 
-		pmc = parent.mainIframe.contentWindow;
+		pmc = parent.ifrMain.contentWindow;
 		THREE = pmc.THREE;
 		scene = pmc.scene
 		camera = pmc.camera;
@@ -348,7 +348,7 @@ Ambient Light Intensity <output id=outAmbientIntensity for="inpAmbientIntensity"
 
 	function setMonth() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
 //		pmc.parameters.month = parseInt( inpMonth.value, 10 );
 
@@ -356,7 +356,7 @@ Ambient Light Intensity <output id=outAmbientIntensity for="inpAmbientIntensity"
 
 //		drawSunRange();
 
-// console.log( '', parent.mainIframe.contentWindow.parameters.month );
+// console.log( '', parent.ifrMain.contentWindow.parameters.month );
 
 	}
 
@@ -364,13 +364,13 @@ Ambient Light Intensity <output id=outAmbientIntensity for="inpAmbientIntensity"
 
 	function setDate() {
 
-		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
 
 		outDate.value = parseInt( inpDate.value, 10 );
 
 //		drawSunRange();
 
-// console.log( '', parent.mainIframe.contentWindow.parameters.date );
+// console.log( '', parent.ifrMain.contentWindow.parameters.date );
 
 	}
 

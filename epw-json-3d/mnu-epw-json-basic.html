@@ -87,15 +87,13 @@
 
 		selField.onchange = getFieldData;
 
-
-
-		if ( parent.main && parent.mainIframe ) {
+		if ( parent.main && parent.ifrMain ) {
 
 			parent.iframeMenu.style.height = document.body.scrollHeight + 'px';
 			document.body.style.overflow = 'hidden';
 			header.style.display = 'none';
 
-			parent.icw = parent.mainIframe.contentWindow; // use 'icw' in console.log
+			parent.icw = parent.ifrMain.contentWindow; // use 'icw' in console.log
 
 		} else {
 
@@ -141,8 +139,8 @@
 
 		}
 
-//		selCountry.selectedIndex = 0;
-		selCountry.selectedIndex = Math.floor( Math.random() * selCountry.length );
+		selCountry.selectedIndex = 1;
+//		selCountry.selectedIndex = Math.floor( Math.random() * selCountry.length );
 
 		getCities();
 
@@ -172,7 +170,8 @@
 
 		}
 
-		selCity.selectedIndex = Math.floor( Math.random() * selCity.length );
+		selCity.selectedIndex = 0;
+//		selCity.selectedIndex = Math.floor( Math.random() * selCity.length );
 
 		requestFileEPW();
 
@@ -252,6 +251,7 @@
 
 
 
+
 	function getCalculations( arr ) {
 
 		const b = '<br>';
@@ -289,7 +289,7 @@
 
 // adapt to circumstance or delete
 
-		if ( parent.mainIframe ) {
+		if ( parent.ifrMain ) {
 
 			epwJson.parameters = {
 
@@ -301,13 +301,19 @@
 
 			}
 
-			parent.mainIframe.contentWindow.updateScene( epwJson, arr );
+			latitude = epwJson.location.latitude;
+			longitude = epwJson.location.longitude;
+
+			parent.icw.epwJson = epwJson;
+			parent.icw.heights = arr;
+			parent.icw.location.hash = 'latitude:' + latitude + ',longitude:' + longitude + ',zoom:15,offsetUTC:0';
 
 		}
 
 // console.log( 'arr', arr );
 
 	}
+
 
 
 	function requestFile( url, callback ) {

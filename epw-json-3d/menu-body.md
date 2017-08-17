@@ -11,7 +11,7 @@ Play back a year of weather statistics
 
 <summary>Display the Weather</summary>
 
-<iframe id = "iframeMenu0" src = "mnu-epw-3d.html" width = "100%" height = "420" frameBorder = "0" ></iframe>
+<iframe id = "iframeMenu0" src = "mnu-analemma3-3d-epw.html" width = "100%" height = "420" frameBorder = "0" ></iframe>
 
 
 </details>

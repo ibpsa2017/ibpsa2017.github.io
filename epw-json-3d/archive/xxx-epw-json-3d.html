@@ -2,17 +2,18 @@
 <html lang="en" >
 <head>
 <meta charset="utf-8" >
-<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<!-- https://clicktorelease.com -->
+<!-- https://clicktorelease.com  -->
 <meta name = "viewport" content = "width=device-width, initial-scale=1, shrink-to-fit=no" >
 
+
 <!-- Mr.doob
-<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
--->
-<title>Analemma3 3D</title>
-<meta name=description content="3D map, terrain and buildings in your browser" >
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
+ -->
+
+<title>EPW JSON 3D</title>
+<meta name=description content="3D EPW in your browser - https://energyplus.net/weather" >
 <meta name=keywords content="MapBox,Google,Three.js,WebGL,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name=date content="2017-08-16" >
+<meta name=date content="2017-08-03" >
 <style = "foo" >
 
 
@@ -50,6 +51,7 @@
 	</div>
 
 <script>
+// https://energyplus.net/weather
 
 //Sydney, Australia
 	var defaultLatitude = -33.8675;
@@ -61,11 +63,11 @@
 	var defaultLongitude = -122.398;
 	var defaultOffsetUTC = -420;
 
-	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
-	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
-	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420';
-	let coit = 'latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420';
-	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
+	let sydney = '^latitude^:^-33.8675^,^longitude^:^151.207^,^zoom^:^16^,^offsetUTC^:^-600^';
+	let sfHyatt = '^latitude^:^37.796^,^longitude^:^-122.398^,^zoom^:^16^,^offsetUTC^:^-420^';
+	let alcatraz = '^latitude^:^37.8270^,^longitude^:^-122.423^,^zoom^:^16^,^offsetUTC^:^-420^';
+	let coit = '^latitude^:^37.8024^,^longitude^:^-122.4058^,^zoom^:^16^,^offsetUTC^:^-420^';
+	let santaBarbara = '^latitude^:^34.4208305^,^longitude^:^-119.69819^,^zoom^:^16^,^offsetUTC^:^-420^';
 
 	var defaultZoom = 16;
 
@@ -101,8 +103,9 @@
 
 	function init() {
 
-		parent.projectName = 'Ladybug Web';
-		parent.document.title = 'Analemma 3D';
+//		parent.projectName = 'Ladybug Web';
+//		parent.document.title = 'EPW 3D';
+
 
 		if ( parent.document.getElementById( 'foo' ) ) {
 
@@ -113,6 +116,8 @@
 		title.innerHTML = '<h1><a href="" >' + document.title +'</a> &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+//		renderer.setClearColor(new THREE.Color( 0xaaaaaa, 1.0 ));
+
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
 		document.body.appendChild( renderer.domElement );
@@ -123,7 +128,9 @@
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 200;
 
+
 		scene = new THREE.Scene();
+		scene.fog = new THREE.Fog( 0xffffff, 80, 200 );
 		scene.add( camera );
 
 		window.addEventListener( 'resize', onWindowResize, false );
@@ -132,13 +139,27 @@
 		window.addEventListener( 'keyup', onKeyUp, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-//		if ( window.self === window.top  ) {
+		if ( window.self === window.top  ) {
 
 			onHashChange();
 
-//		}
+		}
 
 		window.addEventListener( 'hashchange', onHashChange, false );
+
+	}
+
+
+	function updateScene( json ) {
+
+		epwJson = json;
+
+//console.log( 'epwJson', epwJson );
+
+		latitude = epwJson.location.latitude;
+		longitude = epwJson.location.longitude;
+
+		location.hash = '^latitude^:^' + latitude + '^,^longitude^:^' + longitude + '^,^zoom^:^15^,^offsetUTC^:^0^';
 
 	}
 
@@ -157,7 +178,7 @@
 		scene.remove( object3D, ground, structures );
 		object3D = new THREE.Object3D();
 		object3D.name = 'object3D';
-console.log( '', 23 );
+
 		structures = new THREE.Object3D();
 		structures.name = 'structures';
 //		ground = new THREE.Object3D();
@@ -186,10 +207,11 @@ console.log( '', 23 );
 
 		hashes = location.hash.split( '#' );
 
-		str = '{"' + hashes[ 1 ].replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
+		regex = new RegExp( "\\" + hashes[ 1 ].charAt( 0 ) + "", "gi" );
+		str = '{' + hashes[ 1 ].replace( regex, '"' )  + '}';
 
 //console.log( 'hashes', hashes );
-//console.log( 'str', str );
+//console.log( 'regex', regex, 'str', str );
 
 		params = JSON.parse( str );
 
@@ -318,14 +340,14 @@ console.log( '', 23 );
 		var lights = new THREE.Object3D();
 		lights.name = 'lights';
 
-//		if ( !lightAmbient ) { 
+//		if ( !lightAmbient ) {
 
 			lightAmbient = new THREE.AmbientLight( 0x444444 );
 			lights.add( lightAmbient );
 
 //		}
 
-//		if ( !lightPointCamera ) { 
+//		if ( !lightPointCamera ) {
 
 			lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
 			camera.add( lightPointCamera );
@@ -334,7 +356,7 @@ console.log( '', 23 );
 
 //		}
 
-//		if ( !lightDirectional ) { 
+//		if ( !lightDirectional ) {
 
 			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
 			lightDirectional.position.set( -size + 0.5 * groundSize, size, size + 0.5 * groundSize );
@@ -395,7 +417,7 @@ console.log( '', 23 );
 
 	function getHeightMapData( map ) {
 
-//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox 
+//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox
 
 		let geometry, material;
 		let heightmapCanvas, heightmapContext;
@@ -590,14 +612,23 @@ alert( 'error', error );
 
 		try {
 
+			if ( response ) {
+
 			json = JSON.parse( response );
 			parseGeoJSON( json );
+
+			} else {
+
+				setCamera();
+
+			}
 
 		}
 
 		catch ( e ) {
 
 console.log( 'callbackGeoJSON error', e );
+console.log( 'callbackGeoJSON response', response );
 
 			setCamera();
 
@@ -638,7 +669,7 @@ console.log( 'callbackGeoJSON error', e );
 
 // console.log( 'json', i, json.features[ i ].properties );
 
-			height = height ? height : 5;
+			height = height ? height : 15;
 
 /*
 			roof = json.features[ i ].properties.roofShape;
@@ -664,7 +695,7 @@ console.log( 'json', i, json.features[ i ] );
 
 				}
 
-				height = hasHeights ? height : 8;
+				height = hasHeights ? height : 20;
 
 				structure = drawShape( vertices, height );
 
@@ -691,9 +722,10 @@ console.log( 'json', i, json.features[ i ] );
 
 // um...
 
-		height = height ? height / 5 : height;
-
+//		height = height ? height / 5 : height;
 //console.log( 'shape height', height );
+
+
 		shape = new THREE.Shape( vertices );
 
 		try {
@@ -720,6 +752,7 @@ console.log( 'json', i, json.features[ i ] );
 			mesh.geometry.computeBoundingBox();
 			mesh.geometry.computeBoundingSphere();
 			mesh.userData.position = mesh.geometry.boundingSphere.center;
+//console.log( 'center', mesh.userData.position );
 			mesh.castShadow = true
 			mesh.receiveShadow = true;
 
@@ -727,9 +760,9 @@ console.log( 'json', i, json.features[ i ] );
 
 		}
 
-		catch (e) {
+		catch ( error ) {
 
-console.log( 'error', e, shape );
+console.log( 'error', error, shape );
 
 		}
 
@@ -758,7 +791,8 @@ console.log( 'error', e, shape );
 
 		if ( intersects.length ) {
 
-			structure.position.y = intersects[ 0 ].point.y;
+			structure.userData.position.y = structure.position.y = intersects[ 0 ].point.y;
+
 /*
 				structure.updateMatrixWorld();
 				structure.geometry.computeBoundingSphere();
@@ -767,7 +801,7 @@ console.log( 'error', e, shape );
 				structure.add( placard );
 */
 
-		} else if ( !parameters.structuresArray.length ) {
+		} else if ( parameters.structuresArray.length === 0 ) {
 
 //console.timeEnd( 'timer 1' );
 

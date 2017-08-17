@@ -15,7 +15,6 @@
 </head>
 <body>
 
-
 Map Overlay
 <select id=selMap size=10 onchange=setMapOverlay(); ></select>
 
@@ -59,11 +58,11 @@ Map Overlay
 
 	function setMapOverlay() {
 
-console.log( '', 23 );
+		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-		parent.mainIframe.contentWindow.mapType = mapTypes[ selMap.selectedIndex ];
-		parent.mainIframe.contentWindow.selectedIndex = selMap.selectedIndex;
-		parent.mainIframe.contentWindow.drawMapOverlay();
+		parent.ifrMain.contentWindow.mapType = mapTypes[ selMap.selectedIndex ];
+		parent.ifrMain.contentWindow.selectedIndex = selMap.selectedIndex;
+		parent.ifrMain.contentWindow.drawMapOverlay();
 
 	}
 

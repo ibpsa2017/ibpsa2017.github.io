@@ -32,6 +32,7 @@
 		<div id="title" ></div>
 		<div id="logHeights" ></div>
 		<div id="logIntersect" ></div>
+		<div id="debug" ></div>
 
 	</div>
 
@@ -121,10 +122,12 @@
 		camera.position.set( 0, 80, 120 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 200;
+		controls.maxDistance = 300;
 
 		scene = new THREE.Scene();
 		scene.add( camera );
+
+		scene.fog = new THREE.Fog( 0xffffff, 80, 300 );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 		onWindowResize();
@@ -132,11 +135,11 @@
 		window.addEventListener( 'keyup', onKeyUp, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-//		if ( window.self === window.top  ) {
+		if ( window.self === window.top  ) {
 
 			onHashChange();
 
-//		}
+		}
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
@@ -157,7 +160,7 @@
 		scene.remove( object3D, ground, structures );
 		object3D = new THREE.Object3D();
 		object3D.name = 'object3D';
-console.log( '', 23 );
+
 		structures = new THREE.Object3D();
 		structures.name = 'structures';
 //		ground = new THREE.Object3D();
@@ -552,6 +555,7 @@ console.log( '', 23 );
 
 	function getStructures() {
 
+		logIntersect.innerHTML = '';
 
 		if ( parameters.zoom < 15 || parameters.zoom > 16 ) {
 
@@ -573,7 +577,7 @@ console.log( '', 23 );
 
 		catch( error ) {
 
-alert( 'error', error );
+console.log( 'getStructures error', error );
 
 		}
 
@@ -590,14 +594,25 @@ alert( 'error', error );
 
 		try {
 
-			json = JSON.parse( response );
-			parseGeoJSON( json );
+			if ( response ) {
+
+				json = JSON.parse( response );
+				parseGeoJSON( json );
+
+			} else {
+
+				logIntersect.innerHTML = 'No building data here';
+
+console.log( 'callbackGeoJSON response', response );
+
+			}
 
 		}
 
 		catch ( e ) {
 
 console.log( 'callbackGeoJSON error', e );
+console.log( 'callbackGeoJSON response', response );
 
 			setCamera();
 
@@ -623,13 +638,14 @@ console.log( 'callbackGeoJSON error', e );
 
 				hasHeights = true;
 
+
 				break;
 
 			}
 
 		}
 
-		logHeights.innerHTML = hasHeights ? '' : 'Data for this area has no building heights<br>';
+		logHeights.innerHTML = hasHeights ? 'Data has building heights' : 'Data for this area has no building heights<br>';
 
 		for ( i = 0; i < json.features.length; i++ ) {
 
@@ -691,7 +707,7 @@ console.log( 'json', i, json.features[ i ] );
 
 // um...
 
-		height = height ? height / 5 : height;
+//		height = height ? height / 5 : height;
 
 //console.log( 'shape height', height );
 		shape = new THREE.Shape( vertices );
