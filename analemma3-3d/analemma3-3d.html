@@ -32,6 +32,7 @@
 		<div id="title" ></div>
 		<div id="logHeights" ></div>
 		<div id="logIntersect" ></div>
+		<div id="debug" ></div>
 
 	</div>
 
@@ -104,12 +105,6 @@
 		parent.projectName = 'Ladybug Web';
 		parent.document.title = 'Analemma 3D';
 
-		if ( parent.document.getElementById( 'foo' ) ) {
-
-			parent.document.getElementById( 'foo' ).innerHTML += "h3 { margin: 0}";
-
-		}
-
 		title.innerHTML = '<h1><a href="" >' + document.title +'</a> &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -121,10 +116,12 @@
 		camera.position.set( 0, 80, 120 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 200;
+		controls.maxDistance = 300;
 
 		scene = new THREE.Scene();
 		scene.add( camera );
+
+		scene.fog = new THREE.Fog( 0xffffff, 80, 300 );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 		onWindowResize();
@@ -157,7 +154,7 @@
 		scene.remove( object3D, ground, structures );
 		object3D = new THREE.Object3D();
 		object3D.name = 'object3D';
-console.log( '', 23 );
+
 		structures = new THREE.Object3D();
 		structures.name = 'structures';
 //		ground = new THREE.Object3D();
@@ -552,6 +549,7 @@ console.log( '', 23 );
 
 	function getStructures() {
 
+		logIntersect.innerHTML = '';
 
 		if ( parameters.zoom < 15 || parameters.zoom > 16 ) {
 
@@ -573,7 +571,7 @@ console.log( '', 23 );
 
 		catch( error ) {
 
-alert( 'error', error );
+console.log( 'getStructures error', error );
 
 		}
 
@@ -590,14 +588,27 @@ alert( 'error', error );
 
 		try {
 
-			json = JSON.parse( response );
-			parseGeoJSON( json );
+			if ( response ) {
+
+				json = JSON.parse( response );
+				parseGeoJSON( json );
+
+				logIntersect.innerHTML = 'Building data is being loaded';
+
+			} else {
+
+				logIntersect.innerHTML = 'No building data here';
+
+console.log( 'callbackGeoJSON response', response );
+
+			}
 
 		}
 
 		catch ( e ) {
 
 console.log( 'callbackGeoJSON error', e );
+console.log( 'callbackGeoJSON response', response );
 
 			setCamera();
 
@@ -615,6 +626,8 @@ console.log( 'callbackGeoJSON error', e );
 
 // much work needed here in order to capture all the available types of features in the data
 
+//console.log( 'json', json );
+
 		let hasHeights = false;
 
 		for ( feature of json.features ) {
@@ -629,15 +642,16 @@ console.log( 'callbackGeoJSON error', e );
 
 		}
 
-		logHeights.innerHTML = hasHeights ? '' : 'Data for this area has no building heights<br>';
+		logHeights.innerHTML = hasHeights ? 'Data has building heights' : 'Data for this area has no building heights<br>';
 
 		for ( i = 0; i < json.features.length; i++ ) {
 
 			polys = json.features[ i ].geometry.coordinates;
 			height = json.features[ i ].properties.height;
 
-// console.log( 'json', i, json.features[ i ].properties );
+//console.log( 'json', i, json.features[ i ].properties );
 
+// everything must have a hight otherwise we can't see it
 			height = height ? height : 5;
 
 /*
@@ -664,7 +678,9 @@ console.log( 'json', i, json.features[ i ] );
 
 				}
 
-				height = hasHeights ? height : 8;
+// need to figure out the right scale here - or make adjustable
+
+				height = hasHeights ? height / 5 : 5;
 
 				structure = drawShape( vertices, height );
 
@@ -689,11 +705,8 @@ console.log( 'json', i, json.features[ i ] );
 
 		let geometry, shape, material, mesh;
 
-// um...
-
-		height = height ? height / 5 : height;
-
 //console.log( 'shape height', height );
+
 		shape = new THREE.Shape( vertices );
 
 		try {
@@ -711,6 +724,8 @@ console.log( 'json', i, json.features[ i ] );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( deltaX, 0, deltaY ) );
 
 			geometry.applyMatrix( new THREE.Matrix4().makeScale( parameters.scaleX, 1, parameters.scaleZ ) );
+
+// helps when things go of into the distance
 //	geometry.center();
 
 			material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff, side: 2 } );

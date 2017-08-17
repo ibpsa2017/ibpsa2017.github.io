@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang = "en" >
 <head>
+
 <meta charset = "utf-8" >
 
 <!-- https://clicktorelease.com -->
@@ -12,7 +13,9 @@
 <meta name=description content="an unofficial site created by and for Building Simulation 2017 conference attendees." >
 <meta name=keywords content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
 <meta name=date content="2017-08-16" >
-<style id="foo" >
+<title></title>
+
+<style id = "foo" >
 
 /* items mostly in tag/class/id then alphabetical order */
 
@@ -21,6 +24,7 @@ body, html { background-color: #fefefe; font: 12pt monospace; height: 100%; marg
 a { color: crimson; }
 
 blockquote, pre { background-color: #eee; padding: 10px; }
+
 
 
 .center { border: 0px solid red; left: 0; margin: 0 auto; max-width: 800px; position: absolute; right: 0; }
@@ -185,6 +189,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			requestFile( url, menuBody );
 
+// needed??
 		} else if ( url.startsWith( 'html' ) ) {
 
 			menu.innerHTML = '<iframe id=ifrMenu class=iframeMenu src=' + url + ' ></iframe>';
@@ -205,7 +210,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		} else {
 
-			menuIframe.contentWindow.location.hash = url;
+			ifrMenu.contentWindow.location.hash = url;
 			ifrMain.contentWindow.location.hash = url;
 
 		}
@@ -315,6 +320,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 			target.innerHTML = converter.makeHtml( xhr.responseText );
 
 //			projectName = document.links[ 0 ].text;
+
+			onload();
 			onWindowResize();
 		};
 
@@ -322,6 +329,9 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 	}
 
+
+
+	function onload() {}
 
 </script>
 </body>

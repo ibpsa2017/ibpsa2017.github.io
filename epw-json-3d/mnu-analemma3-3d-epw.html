@@ -333,7 +333,7 @@ Click to start & stop:
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
 		geometry.merge( new THREE.CylinderGeometry( 12, 0, 20, 3 ) );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * pi ) );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( - pi ) );
+//		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( - pi ) );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -30 ) );
 		material = new THREE.MeshNormalMaterial( { opacity: 0.5, transparent: true } );
 		mesh = new THREE.Mesh( geometry, material );
@@ -403,15 +403,15 @@ Click to start & stop:
 		y = 0.5;
 		z = 0;
 
-		x = Math.sin( dir );
-		y = Math.cos( dir );
+		x = Math.cos( dir );
+		y = Math.sin( dir );
 		matrix = new THREE.Matrix4();
 		matrix.makeShear( x, y, z );
 
 
 		for ( var i = 0; i < structures.children.length; i++ ) {
 
-			var structure = structures.children[ i ];
+			var structure = structures.children[ 0 ];
 
 //console.log( 'structure', structure );
 
@@ -449,7 +449,7 @@ Click to start & stop:
 		ground.material.emissive = new THREE.Color( c, c, c );
 
 		pointer.rotation.y = dir;
-		pointer.scale.z = 0.0001 + 0.05 * data[ windSpeed ];
+//		pointer.scale.z = 0.0001 + 0.05 * data[ windSpeed ];
 //		pointer.geometry = pointer.geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 + 0.03 * data[ 7 ] ) );
 
 	}
@@ -467,7 +467,7 @@ Click to start & stop:
 
 	function play() {
 
-		setTimeout( play, 1000 );
+		setTimeout( play, 100 );
 //		requestAnimationFrame( play );
 		if ( playTheYear ) { goToNextHour(); }
 

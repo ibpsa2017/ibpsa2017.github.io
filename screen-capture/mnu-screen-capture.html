@@ -83,16 +83,18 @@
 
 	function setIframe() {
 
-		url = parent.mainIframe.src;
+		const style = '"height:480px; margin: 100px 0 0 200px; width: 640px; position: absolute;"';
 
-		parent.main.innerHTML = '<iframe id=mainIframe src=' + url + ' height=480 style="margin: 100px 0 0 200px; width: 640px; position: absolute;" ></iframe>';
+		const url = !parent.ifrMain ? 'analemma3-3d.html' : parent.ifrMain.src;
+
+		parent.main.innerHTML = '<iframe id=ifrMain src=' + url + ' style= ' + style + ' ></iframe>';
 
 	}
 
 
 	function updateScene() {
 
-		icw = parent.mainIframe.contentWindow;
+		icw = parent.ifrMain.contentWindow;
 
 console.log( '', icw );
 
