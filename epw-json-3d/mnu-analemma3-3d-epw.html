@@ -168,10 +168,10 @@ Click to start & stop:
 			'<input type=checkbox id = "chkRotate" checked > Rotation' +
 			'</p>';
 
-
 		chkRotate.onclick = toggleRotation;
 
 		offset = 0;
+
 		for ( var i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
 
 			field = epwJson.hourlyDataFields[ i ];
@@ -353,7 +353,6 @@ Click to start & stop:
 		let p = parameters;
 		let dayCount = 0;
 
-
 		for ( let i = 0; i <  p.month; i++ ) {
 
 			dayCount += daysOfMonth[ i ];
@@ -397,7 +396,6 @@ Click to start & stop:
 
 		dir = - data[ windDir ] * Math.PI / 180;
 		pmc.debug.innerHTML = 'dir ' + data[ windDir ] ;
-
 
 		x = 0.5;
 		y = 0.5;

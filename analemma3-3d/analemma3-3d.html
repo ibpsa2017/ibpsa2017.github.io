@@ -73,10 +73,8 @@
 	var parameters = {};
 	parameters.structuresArray = {};
 
-	var lights;
-	var lightAmbient, lightPointCamera, lightDirectional, cameraHelper;
-
-	var axisHelper;
+	let structures;
+	let structuresArray = [];
 
 	var mapType;
 
@@ -84,12 +82,14 @@
 	var ground;
 	var groundSize = 100;
 
-	var structures;
-	let structuresArray = [];
 
 	var mbptoken='pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
 	var data;
 
+	var lights;
+	var lightAmbient, lightPointCamera, lightDirectional, cameraHelper;
+
+	var axisHelper;
 	var renderer, camera, controls, scene;
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi * 2;
@@ -690,10 +690,13 @@ console.log( 'json', i, json.features[ i ] );
 					structure.userData.geometryOriginal = structure.geometry.clone();
 					structures.add( structure );
 					parameters.structuresArray.push( structure );
-
+					
 				}
 
 			}
+
+			structuresArray = parameters.structuresArray.slice();
+
 
 		}
 
@@ -760,7 +763,7 @@ console.log( 'error', e, shape );
 		vectorFarDown = new THREE.Vector3( 0, -100, 0 );
 		vectorLookUp = new THREE.Vector3( 0, 1, 0 );
 
-		structure = parameters.structuresArray.pop();
+		var structure = structuresArray.pop();
 
 		arr = structure.geometry.attributes.position.array;
 		position = new THREE.Vector3( arr[ 0 ], -100, arr[ 2 ] );
@@ -773,7 +776,10 @@ console.log( 'error', e, shape );
 
 		if ( intersects.length ) {
 
-			structure.position.y = intersects[ 0 ].point.y;
+			let y = intersects[ 0 ].point.y;
+			structure.position.y = y;
+			parameters.structuresArray[ parseInt( structure.name, 10 ) ].position.y = y;
+//console.log( 'nn', parameters.structuresArray[ parseInt( structure.name, 10 ) ] );
 /*
 				structure.updateMatrixWorld();
 				structure.geometry.computeBoundingSphere();
@@ -782,7 +788,7 @@ console.log( 'error', e, shape );
 				structure.add( placard );
 */
 
-		} else if ( !parameters.structuresArray.length ) {
+		} else if ( !structuresArray.length ) {
 
 //console.timeEnd( 'timer 1' );
 
@@ -790,7 +796,7 @@ console.log( 'error', e, shape );
 
 		}
 
-		logIntersect.innerHTML = parameters.structuresArray.length + ' of ' + structures.children.length + ' structures remaining';
+		logIntersect.innerHTML = structuresArray.length + ' of ' + structures.children.length + ' structures remaining';
 
 	}
 
@@ -887,7 +893,7 @@ console.log( 'error', e, shape );
 		renderer.render( scene, camera );
 		controls.update();
 
-		if ( parameters.structuresArray.length ) { findIntersects(); }
+		if ( structuresArray.length ) { findIntersects(); }
 
 	}
 

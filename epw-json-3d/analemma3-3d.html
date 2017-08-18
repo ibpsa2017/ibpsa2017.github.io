@@ -73,10 +73,8 @@
 	var parameters = {};
 	parameters.structuresArray = {};
 
-	var lights;
-	var lightAmbient, lightPointCamera, lightDirectional, cameraHelper;
-
-	var axisHelper;
+	let structures;
+	let structuresArray = [];
 
 	var mapType;
 
@@ -84,12 +82,14 @@
 	var ground;
 	var groundSize = 100;
 
-	var structures;
-	let structuresArray = [];
 
 	var mbptoken='pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
 	var data;
 
+	var lights;
+	var lightAmbient, lightPointCamera, lightDirectional, cameraHelper;
+
+	var axisHelper;
 	var renderer, camera, controls, scene;
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi * 2;
@@ -104,12 +104,6 @@
 
 		parent.projectName = 'Ladybug Web';
 		parent.document.title = 'Analemma 3D';
-
-		if ( parent.document.getElementById( 'foo' ) ) {
-
-			parent.document.getElementById( 'foo' ).innerHTML += "h3 { margin: 0}";
-
-		}
 
 		title.innerHTML = '<h1><a href="" >' + document.title +'</a> &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 
@@ -599,6 +593,8 @@ console.log( 'getStructures error', error );
 				json = JSON.parse( response );
 				parseGeoJSON( json );
 
+				logIntersect.innerHTML = 'Building data is being loaded';
+
 			} else {
 
 				logIntersect.innerHTML = 'No building data here';
@@ -630,6 +626,8 @@ console.log( 'callbackGeoJSON response', response );
 
 // much work needed here in order to capture all the available types of features in the data
 
+//console.log( 'json', json );
+
 		let hasHeights = false;
 
 		for ( feature of json.features ) {
@@ -637,7 +635,6 @@ console.log( 'callbackGeoJSON response', response );
 			if ( feature.properties.height ) {
 
 				hasHeights = true;
-
 
 				break;
 
@@ -652,8 +649,9 @@ console.log( 'callbackGeoJSON response', response );
 			polys = json.features[ i ].geometry.coordinates;
 			height = json.features[ i ].properties.height;
 
-// console.log( 'json', i, json.features[ i ].properties );
+//console.log( 'json', i, json.features[ i ].properties );
 
+// everything must have a hight otherwise we can't see it
 			height = height ? height : 5;
 
 /*
@@ -680,7 +678,9 @@ console.log( 'json', i, json.features[ i ] );
 
 				}
 
-				height = hasHeights ? height : 8;
+// need to figure out the right scale here - or make adjustable
+
+				height = hasHeights ? height / 5 : 5;
 
 				structure = drawShape( vertices, height );
 
@@ -690,10 +690,13 @@ console.log( 'json', i, json.features[ i ] );
 					structure.userData.geometryOriginal = structure.geometry.clone();
 					structures.add( structure );
 					parameters.structuresArray.push( structure );
-
+					
 				}
 
 			}
+
+			structuresArray = parameters.structuresArray.slice();
+
 
 		}
 
@@ -705,11 +708,8 @@ console.log( 'json', i, json.features[ i ] );
 
 		let geometry, shape, material, mesh;
 
-// um...
-
-//		height = height ? height / 5 : height;
-
 //console.log( 'shape height', height );
+
 		shape = new THREE.Shape( vertices );
 
 		try {
@@ -727,6 +727,8 @@ console.log( 'json', i, json.features[ i ] );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( deltaX, 0, deltaY ) );
 
 			geometry.applyMatrix( new THREE.Matrix4().makeScale( parameters.scaleX, 1, parameters.scaleZ ) );
+
+// helps when things go of into the distance
 //	geometry.center();
 
 			material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff, side: 2 } );
@@ -761,7 +763,7 @@ console.log( 'error', e, shape );
 		vectorFarDown = new THREE.Vector3( 0, -100, 0 );
 		vectorLookUp = new THREE.Vector3( 0, 1, 0 );
 
-		structure = parameters.structuresArray.pop();
+		var structure = structuresArray.pop();
 
 		arr = structure.geometry.attributes.position.array;
 		position = new THREE.Vector3( arr[ 0 ], -100, arr[ 2 ] );
@@ -774,7 +776,10 @@ console.log( 'error', e, shape );
 
 		if ( intersects.length ) {
 
-			structure.position.y = intersects[ 0 ].point.y;
+			let y = intersects[ 0 ].point.y;
+			structure.position.y = y;
+			parameters.structuresArray[ parseInt( structure.name, 10 ) ].position.y = y;
+//console.log( 'nn', parameters.structuresArray[ parseInt( structure.name, 10 ) ] );
 /*
 				structure.updateMatrixWorld();
 				structure.geometry.computeBoundingSphere();
@@ -783,7 +788,7 @@ console.log( 'error', e, shape );
 				structure.add( placard );
 */
 
-		} else if ( !parameters.structuresArray.length ) {
+		} else if ( !structuresArray.length ) {
 
 //console.timeEnd( 'timer 1' );
 
@@ -791,7 +796,7 @@ console.log( 'error', e, shape );
 
 		}
 
-		logIntersect.innerHTML = parameters.structuresArray.length + ' of ' + structures.children.length + ' structures remaining';
+		logIntersect.innerHTML = structuresArray.length + ' of ' + structures.children.length + ' structures remaining';
 
 	}
 
@@ -888,7 +893,7 @@ console.log( 'error', e, shape );
 		renderer.render( scene, camera );
 		controls.update();
 
-		if ( parameters.structuresArray.length ) { findIntersects(); }
+		if ( structuresArray.length ) { findIntersects(); }
 
 	}
 
