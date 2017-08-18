@@ -95,8 +95,6 @@ Click to start & stop:
 		inpDate.onclick = initSunPath;
 		inpHour.onclick = initSunPath;
 
-//		requestFile( fileName, callbackEPW );
-
 		window.addEventListener( 'close', function() { playTheYear = false; }, false );
 
 //		parent.iframeMenu0.style.height = document.body.scrollHeight + 'px';
@@ -108,7 +106,6 @@ Click to start & stop:
 	function initSunPath() {
 
 		if ( !parent.ifrMain ) { parent.location = 'index.html'; return; }
-
 
 		pmc = parent.ifrMain.contentWindow;
 		THREE = pmc.THREE;
@@ -122,9 +119,6 @@ Click to start & stop:
 		lights = pmc.lights;
 		ground = pmc.ground;
 		epwJson = pmc.epwJson;
-
-//		scene.fog = new THREE.FogExp2( 0xaaaaaa, 10 );
-//console.log( '', scene.fog );
 
 		analemmaRadius = 0.8 * pmc.groundSize;
 		parameters.offsetUTC = -420;
@@ -163,9 +157,9 @@ Click to start & stop:
 
 		if ( playTheYear ) { play(); }
 
-		toggles.innerHTML += 
+		toggles.innerHTML = 
 			'<p>' +
-			'<input type=checkbox id = "chkRotate" checked > Rotation' +
+				'<input type=checkbox id = "chkRotate" checked > Rotation' +
 			'</p>';
 
 		chkRotate.onclick = toggleRotation;
@@ -406,6 +400,8 @@ Click to start & stop:
 		matrix = new THREE.Matrix4();
 		matrix.makeShear( x, y, z );
 
+		pic = parent.ifrMain.contentWindow;
+		let structures = pic.scene.getObjectByName( 'structures');
 
 		for ( var i = 0; i < structures.children.length; i++ ) {
 

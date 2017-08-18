@@ -19,6 +19,9 @@
 ### [Analemma]( #menu-analemma.md )
 ### [Sun Range]( #menu-sun-range.md )
 ### [Solar Access]( #menu-solar-access.md )
-### [Screen Capture]( #menu-screen-capture.md )
+### [Screen Capture]( #menu-screen-capture.md "Create an animated GIF" )
 ### [Skew Test]( #menu-skew-test.md )
+### [EPW JSON]( #menu-epw-json.md "EnergyPlus Weather Files in 3D" )
+
+
 ***

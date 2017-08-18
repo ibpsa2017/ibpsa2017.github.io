@@ -59,7 +59,7 @@
 	function initSkewing() {
 
 		pic = parent.ifrMain.contentWindow;
-console.log( 'pic', pic );
+//console.log( 'pic', pic );
 		material = new pic.THREE.MeshNormalMaterial();
 
 		geometryCube = createCube( 5 );
@@ -98,7 +98,7 @@ console.log( 'pic', pic );
 
 		if ( !pic ) { initSkewing(); }
 
-		let geom, matrix;
+		let geom, mat, matrix;
 		let x, y, z;
 
 		x = parseFloat( inpX.value );
@@ -143,6 +143,8 @@ console.log( 'pic', pic );
 			structure.geometry.dispose();
 			structure = new pic.THREE.Mesh( geom, mat );
 			structure.position.y = original.position.y;
+			structure.castShadow = true;
+			structure.receiveShadow = true;
 			structures.add( structure );
 
 		}

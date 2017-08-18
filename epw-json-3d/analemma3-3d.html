@@ -779,6 +779,7 @@ console.log( 'error', e, shape );
 			let y = intersects[ 0 ].point.y;
 			structure.position.y = y;
 			parameters.structuresArray[ parseInt( structure.name, 10 ) ].position.y = y;
+
 //console.log( 'nn', parameters.structuresArray[ parseInt( structure.name, 10 ) ] );
 /*
 				structure.updateMatrixWorld();
@@ -893,7 +894,7 @@ console.log( 'error', e, shape );
 		renderer.render( scene, camera );
 		controls.update();
 
-		if ( structuresArray.length ) { findIntersects(); }
+		if ( parameters.structuresArray.length ) { findIntersects(); }
 
 	}
 
