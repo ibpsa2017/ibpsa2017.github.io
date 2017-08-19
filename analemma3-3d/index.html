@@ -98,6 +98,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		<div id = "menuBody" class = "menuSub" ></div>
 
+		<div id = "menuDialog" class = "menuSub" ></div>
+
 		<div id = "menuFoot" class = "menuSub" ></div>
 
 	</div>
@@ -185,7 +187,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		} else if ( url.startsWith( 'menu' ) ) {
 
-			menuBody.innerHTML = '<div id=menuContents class=menu ></div>';
+//			menuBody.innerHTML = '<div id=menuContents class=menu ></div>';
 
 			requestFile( url, menuBody );
 
@@ -193,6 +195,12 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 		} else if ( url.startsWith( 'html' ) ) {
 
 			menu.innerHTML = '<iframe id=ifrMenu class=iframeMenu src=' + url + ' ></iframe>';
+
+		} else if ( url.startsWith( 'dialog' ) ) {
+
+//			menuDialog.innerHTML = '<div id=menuThing class=menu ></div>';
+console.log( 'url', url );
+			requestFile( url, menuDialog );
 
 		} else if ( url.endsWith( '.md' ) ) {
 

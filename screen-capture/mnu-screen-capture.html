@@ -18,8 +18,13 @@
 </head>
 <body>
 <script src=https://rawgit.com/spite/ccapture.js/dev/build/CCapture.all.min.js ></script>
-
-	Screen Capture
+<!--
+<script src=https://rawgit.com/spite/ccapture.js/master/src/Whammy.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/tar.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/download.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/gif.js ></script>
+-->
+	Screen Capture Dev
 
 	<p><button onclick=setIframe(); >Set Iframe</button></p>
 
@@ -46,14 +51,14 @@
 	let cameraRadius = 50;
 	let cameraHeight = 50;
 
-//	var capturer = new CCapture( { format: 'webm' } );
+//	var capturer = new CCapture( { format: 'gif' } );
 
 // Create a capturer that exports an animated GIF
 // Notices you have to specify the path to the gif.worker.js
 
-	var capturer = new CCapture( { format: 'gif' } );
+//	var capturer = new CCapture( { format: 'gif' } );
 
-//	var capturer = new CCapture( { format: 'gif', workersPath: 'js/' } );
+	var capturer = new CCapture( { format: 'gif', workersPath: 'js/' } );
 // Create a capturer that exports PNG images in a TAR file
 //	var capturer = new CCapture( { format: 'png' } );
 
@@ -65,6 +70,7 @@
 	var radius;
 
 	capturer = new CCapture( {
+
 		verbose: true,
 		display: true,
 		name: 'demo',
@@ -83,7 +89,7 @@
 
 	function setIframe() {
 
-		const style = '"height:480px; margin: 100px 0 0 200px; width: 640px; position: absolute;"';
+		const style = '"height:360px; margin: 100px 0 0 200px; width: 480px; position: absolute;"';
 
 		const url = !parent.ifrMain ? 'analemma3-3d.html' : parent.ifrMain.src;
 
@@ -135,6 +141,7 @@ console.log( '', icw );
 		if ( step >= 0 ) {
 
 			step += Math.PI / 120;
+
 			icw.camera.position.x = 50 + cameraRadius * Math.sin( step );
 			icw.camera.position.y = cameraHeight;
 			icw.camera.position.z = 50 + cameraRadius * Math.cos( step );
