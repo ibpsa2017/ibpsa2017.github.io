@@ -79,13 +79,6 @@
 
 	function init() {
 
-
-		if ( parent.main && !parent.ifrMain ) {
-
-			parent.main.innerHTML = '<iframe id=ifrMain class=iframeMain src="analemma3-3d.html" ></iframe>';
-
-		}
-
 		requestFileCountryData();
 
 		selCountry.onchange = getCities;
@@ -94,13 +87,11 @@
 
 		selField.onchange = getFieldData;
 
-		if ( parent.main && parent.ifrMain ) {
+		if ( parent.main && parent.ifrMenu ) {
 
 			parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
 			document.body.style.overflow = 'hidden';
 			header.style.display = 'none';
-
-			parent.icw = parent.ifrMain.contentWindow; // use 'icw' in console.log
 
 		} else {
 
@@ -132,6 +123,7 @@
 		getCountries();
 
 	}
+
 
 
 	function getCountries() {
@@ -294,7 +286,7 @@
 
 // adapt to circumstance or delete
 
-		if ( parent.ifrMain ) {
+//		if ( parent.ifrMain ) {
 
 			epwJson.parameters = {
 
@@ -309,11 +301,11 @@
 			latitude = epwJson.location.latitude;
 			longitude = epwJson.location.longitude;
 
-			parent.icw.epwJson = epwJson;
-			parent.icw.heights = arr;
-			parent.icw.location.hash = 'latitude:' + latitude + ',longitude:' + longitude + ',zoom:15,offsetUTC:0';
+			parent.epwJson = epwJson;
+			parent.heights = arr;
+			parent.location.hash = 'analemma3-3d.html#latitude:' + latitude + ',longitude:' + longitude + ',zoom:15,offsetUTC:0';
 
-		}
+//		}
 
 // console.log( 'arr', arr );
 

@@ -75,12 +75,13 @@ _This is the read me for Analemma 3D R1. Needs much updating._
 _If you are in '[Home Page View]( https://ladybug-tools.github.io/ladybug-web/analemma-3d/#readme.md )', you can do all this in the window just above._
 
 ## Things you can do by editing the code
-
+<!--
 <iframe src='https://ladybug-tools.github.io/ladybug-web/ace-view-r1.html#
 	https://ladybug-tools.github.io/ladybug-web/analemma-3d/analemma-3d-r16.html' width=100% height=600 ></iframe>
 
 <input type=button onclick=window.location.href='https://github.com/ladybug-tools/ladybug-web/blob/gh-pages/analemma-3d/analemma-3d-r16.html';
 value='Ladybug Web Analemma 3D: the entire source code listing' >
+-->
 
 * Open this file: https://github.com/ladybug-tools/ladybug-web/blob/gh-pages/analemma-3d/analemma-3d-r16.html
 * Click the 'Raw' icon and save the raw file to your computer

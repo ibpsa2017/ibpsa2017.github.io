@@ -22,6 +22,6 @@
 ### [Screen Capture]( #menu-screen-capture.md "Create an animated GIF" )
 ### [Skew Test]( #menu-skew-test.md )
 ### [EPW JSON]( #menu-epw-json.md "EnergyPlus Weather Files in 3D" )
-
+### [EPW Play Weather]( #menu-epw-json-play.md "Play EPW Weather Files in 3D" )
 
 ***

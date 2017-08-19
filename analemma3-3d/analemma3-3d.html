@@ -893,7 +893,7 @@ console.log( 'error', e, shape );
 		renderer.render( scene, camera );
 		controls.update();
 
-		if ( structuresArray.length ) { findIntersects(); }
+		if ( structuresArray.length && parameters.structuresArray.length ) { findIntersects(); }
 
 	}
 

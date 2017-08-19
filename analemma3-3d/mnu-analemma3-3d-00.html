@@ -18,9 +18,9 @@
 <body>
 <script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
 
-<div>See <a href="index.html#readme-analemma.md" target="_top" >read me</a> for details</div>
 
 <p>
+
 <button onclick="initSunPath();" >Draw Analemma & Sun</button>
 </p>
 
@@ -42,12 +42,26 @@ Click to start & stop:
 </p>
 
 <p>
-<button onclick="togglePlayTheYear();" >Play the Solar Year</button>
+<button onclick="togglePlayTheYear();" >Play the Year</button>
 </p>
 
+<p id=toggles ></p>
+
+<p>See read me for details</p>
+
+<details>
+
+<summary>Data</summary>
+
+<p id=epwContents ></p>
+
+</details>
 
 <script>
 
+	let fileName;
+//	fileName = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/data/SF_example_data.csv';
+//	fileName = '../data/SF_example_data.csv';
 
 	var pmc;
 	var THREE;
@@ -66,9 +80,10 @@ Click to start & stop:
 
 	let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
+	let indexEPW;
+
 	let playTheYear = false;
 
-	let count = 0;
 
 	init();
 
@@ -84,12 +99,12 @@ Click to start & stop:
 		inpDate.onclick = initSunPath;
 		inpHour.onclick = initSunPath;
 
+//		requestFile( fileName, callbackEPW );
+
 		window.addEventListener( 'close', function() { playTheYear = false; }, false );
 
-		parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
-
+//		parent.iframeMenu0.style.height = document.body.scrollHeight + 'px';
 //console.log( 'document.body.scrollHeight', document.body.scrollHeight );
-
 	}
 
 
@@ -99,8 +114,6 @@ Click to start & stop:
 		if ( !parent.ifrMain ) {
 
 			parent.main.innerHTML = '<iframe id=ifrMain class=iframeMain src="analemma3-3d.html" ></iframe>';
-
-			return;
 
 		}
 
@@ -115,6 +128,9 @@ Click to start & stop:
 		object3D = pmc.object3D;
 		lights = pmc.lights;
 		ground = pmc.ground;
+
+//		scene.fog = new THREE.FogExp2( 0xaaaaaa, 10 );
+//console.log( '', scene.fog );
 
 		analemmaRadius = 0.8 * pmc.groundSize;
 		parameters.offsetUTC = -420;
@@ -140,6 +156,13 @@ Click to start & stop:
 
 			initSunAndLight();
 
+//			pointer = drawPointer3D();
+//			pointer.position.set( 50, 10, 0 );
+
+//			scene.add( pointer );
+
+//console.log( '', pointer );
+
 		}
 
 		inpMonth.onclick = setMonth;
@@ -147,6 +170,22 @@ Click to start & stop:
 		inpHour.onclick = setHour;
 
 		if ( playTheYear ) { play(); }
+
+		toggles.innerHTML +=
+			'<p>' +
+			'<input type=checkbox id = "chkRotate" checked > Rotation' +
+			'</p>';
+
+
+		chkRotate.onclick = toggleRotation;
+
+	}
+
+
+
+	function toggleRotation() {
+
+		controls.autoRotate = !controls.autoRotate;
 
 	}
 
@@ -241,15 +280,18 @@ Click to start & stop:
 
 	function initSunAndLight() {
 
+//		lights = new THREE.Object3D();
+
 		var geometry, material, d;
 
 		geometry = new THREE.SphereBufferGeometry( 3, 20, 10 );
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 		sun = new THREE.Mesh( geometry, material );
+//		sun.position.set( 0, 149597870700, 0 ); // 1 astronomical unit but we'll likely reposition it later
 
 		lightDirectional.add( sun );
-
-		scene.add( lights );
+//		scene.remove( lights );
+//		scene.add( lights );
 
 		setSunPosition();
 
@@ -269,8 +311,159 @@ Click to start & stop:
 
 		lightDirectional.position.copy( controls.target.clone().add( sun.userData.position.xyz ) );
 
+//		lightDirectional.position.copy( sun.position );
+
+
 //console.log( 'lightDirectional.position', lightDirectional.position );
 //console.log( 'sun.position', sun.position );
+
+	}
+
+
+/*
+	function drawPointer3D() {
+
+		var geometry, material, mesh;
+
+		geometry = new THREE.CylinderGeometry( 10, 5, 80, 3 );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
+		geometry.merge( new THREE.CylinderGeometry( 12, 0, 20, 3 ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * pi ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( - pi ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -30 ) );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.5, transparent: true } );
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.multiplyScalar( 0.25 );
+
+		return mesh;
+
+	}
+
+
+
+	function getEPW() {
+
+		let index;
+		const b = '<br>';
+
+		let p = parameters;
+		let dayCount = 0;
+
+
+		for ( let i = 0; i <  p.month; i++ ) {
+
+			dayCount += daysOfMonth[ i ];
+
+		}
+
+		indexEPW = p.hour + 24 * ( p.date + dayCount );
+
+		data = epw[ indexEPW ];
+
+		if ( !data ) { return; }
+
+		epwContents.innerHTML =
+
+			'<h3>Item: ' + indexEPW + '</h3>' +
+			'Date: ' + data[ 0 ] + b +
+			'Time: ' + data[ 1 ] + b +
+			'Dry Bulb Temperature {C}: ' + data[ 2 ] + b +
+			'Dew Point Temperature {C}: ' + data[ 3 ] + b +
+			'Relative Humidity {%}: ' + data[ 4 ] + b +
+			'Direct Normal Radiation {Wh/m2}: ' + b + data[ 5 ] + b +
+			'Wind Direction {deg}: ' + b + data[ 6 ] + b +
+			'Wind Speed {m/s}: ' + data[ 7 ] + b +
+
+		'';
+
+		updateScene();
+
+	}
+
+
+
+
+	function updateScene(){
+
+		let data = epw[ indexEPW ];
+		let geometry, material, userData, p;
+		let matrix;
+
+		lightDirectional.intensity  = data[ 5 ] / 300;
+
+//console.log( 'intensity', lightDirectional.intensity );
+
+		windDir = data[ 6 ] * Math.PI / 180;
+
+		x = 0.5;
+		y = 0.5;
+		z = 0;
+
+		matrix = new THREE.Matrix4();
+		matrix.makeShear( x, y, z );
+
+
+		for ( var i = 0; i < structures.children.length; i++ ) {
+
+			structure = structures.children[ i ];
+
+//console.log( 'structure', structure );
+
+			userData = structure.userData;
+			p = userData.position;
+			geometry = structure.userData.geometryOriginal.clone();
+			geometry.center();
+//			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( windDir ) );
+
+//			matrix = new THREE.Matrix4();
+//			matrix.makeShear( x, y, z );
+
+			geometry.applyMatrix( matrix );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( p.x, p.y, p.z ) );
+
+			material =  structure.material.clone();
+
+			structures.remove( structure );
+			structure = new THREE.Mesh( geometry, material );
+			structure.castShadow = true;
+			structure.receiveShadow = true;
+			structure.userData = userData;
+			structures.add( structure );
+
+		}
+
+
+		structures.scale.y = 0.01 + data[ 2 ] / 10;
+
+		scene.fog.far = 150 + parseInt( data[ 4 ], 10 );
+
+// console.log( '', scene.fog.far, data[ 4 ] );
+
+		c = parseInt( data[ 4 ], 10 ) / 220;
+		ground.material.emissive = new THREE.Color( c, c, c );
+
+		pointer.rotation.y = data[ 6 ] * Math.PI / 180;
+		pointer.scale.z = 0.0001 + 0.05 * data[ 7 ];
+//		pointer.geometry = pointer.geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 + 0.03 * data[ 7 ] ) );
+
+	}
+
+*/
+
+
+	function togglePlayTheYear() {
+
+		playTheYear = !playTheYear;
+		play();
+
+	}
+
+
+
+	function play() {
+
+		requestAnimationFrame( play );
+		if ( playTheYear ) { goToNextHour(); }
 
 	}
 
@@ -278,6 +471,7 @@ Click to start & stop:
 
 	function goToNextHour() {
 
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
 		if ( !pmc ) { initSunPath(); }
 
 		thisHour = parseInt( inpHour.value, 10 );
@@ -318,12 +512,15 @@ Click to start & stop:
 
 		setSunPosition();
 
+//		getEPW();
+
 	}
 
 
 
 	function setMonth() {
 
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
 		if ( !pmc ) { initSunPath(); }
 
 		parameters.month = parseInt( inpMonth.value, 10 );
@@ -331,6 +528,7 @@ Click to start & stop:
 		outMonth.value = parameters.month + 1;
 
 		setSunPosition();
+//		getEPW();
 
 // console.log( '', parent.mainIframe.contentWindow.parameters.month );
 
@@ -340,12 +538,13 @@ Click to start & stop:
 
 	function setDate() {
 
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
 		if ( !pmc ) { initSunPath(); }
 
 		outDate.value = parameters.date = parseInt( inpDate.value, 10 );
 
 		setSunPosition();
-
+//		getEPW();
 // console.log( '', parent.mainIframe.contentWindow.parameters.date );
 
 	}
@@ -354,38 +553,16 @@ Click to start & stop:
 
 	function setHour() {
 
-
+//		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
 		if ( !pmc ) { initSunPath(); }
 
 		parameters.hour = parseInt( inpHour.value - parameters.offsetUTC / 60, 10 );
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
 
 		setSunPosition();
+//		getEPW();
 
 // console.log( '', parent.mainIframe.contentWindow.parameters.hours );
-
-	}
-
-
-
-	function togglePlayTheYear() {
-
-		playTheYear = !playTheYear;
-		play();
-
-	}
-
-
-
-	function play() {
-
-		requestAnimationFrame( play );
-
-		if ( count++ % 10 === 0 && playTheYear ) {
-
-			goToNextHour();
-
-		}
 
 	}
 
@@ -479,6 +656,41 @@ Click to start & stop:
 
 
 
+/*
+	function requestFile( fileName, callback ) {
+
+		let xhr, response, data ;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', fileName, true );
+		xhr.onerror = function( xhr ) { console.log( 'error', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'xhr progress/ bytes loaded', xhr.loaded, xhr  ); }; /// or something
+		xhr.onload = callback ? callback : function( xhr ) { console.log( 'load complete', xhr  ); };
+		xhr.send( null );
+
+	}
+
+
+
+	function callbackEPW( xhr ) {
+
+		let response, lines;
+
+		response = xhr.target.response;
+
+		epw = response.split( '\n' ).map( function( line ) { return line.split( ',' ); } );
+
+//console.log( 'epw',epw );
+//console.log( 'length', epw.length );
+
+//			contents.innerHTML = '<textarea cols=60 rows= 50 >' + lines + '</textarea>';
+
+	}
+
+*/
+
+
 	function lon2tile( longitude, zoom ) {
 
 		return Math.floor( ( longitude + 180 ) / 360 * Math.pow( 2, zoom ) );
@@ -490,6 +702,23 @@ Click to start & stop:
 		return Math.floor( ( 1 - Math.log( Math.tan( latitude * pi / 180 ) + 1 / Math.cos( latitude * pi / 180) ) / pi ) / 2 * Math.pow( 2, zoom ) );
 
 	}
+
+/*
+	function tile2lon( x, zoom ) {
+
+		return ( x / Math.pow( 2, zoom ) * 360 - 180 );
+
+	}
+
+	function tile2lat( y, zoom ) {
+
+		var pi = Math.PI
+		var n = pi - 2 * pi * y / Math.pow( 2, zoom );
+		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
+
+	}
+
+*/
 
 
 </script>
