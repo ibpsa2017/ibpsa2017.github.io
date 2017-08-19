@@ -73,7 +73,7 @@
 		verbose: true,
 		display: true,
 		name: 'demo',
-		framerate: 60, //framerate
+		framerate: 40, //framerate
 //			motionBlurFrames: ( 960 / framerate ) * ( document.querySelector('input[name="motion-blur"]').checked ? 1 : 0 ),
 		quality: 50,
 		format: 'gif', //document.querySelector('input[name="encoder"]:checked').value,
@@ -146,7 +146,7 @@ console.log( '', icw );
 
 		if ( step >= 0 ) {
 
-			step += Math.PI / 240;
+			step += Math.PI / 160;
 
 			icw.camera.position.x = 50 + cameraRadius * Math.sin( step );
 			icw.camera.position.y = cameraHeight;
