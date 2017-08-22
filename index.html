@@ -162,7 +162,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 // For example: to set issues as blog on home page
 			url = './plugins/view-github-issues.html';
-			main.innerHTML = '<iframe id=ifrMain class=iframeReadMe src=' + url + ' ></iframe>';
+// /* class=iframeReadMe */
+			main.innerHTML = '<iframe id=ifrMain  src=' + url + ' ></iframe>';
 			main.style.overflow = 'hidden';
 
 		} else if ( url.startsWith( '.\/pages/menu' ) ) {
