@@ -31,7 +31,7 @@
 
 	let fileName;
 	fileName = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/data/SF_example_data.csv';
-	fileName = '../data/SF_example_data.csv';
+	fileName = '../../data/SF_example_data.csv';
 
 
 	let cubes;
@@ -153,7 +153,7 @@
 
 			loader = new THREE.TextureLoader();
 			loader.crossOrigin = 'anonymous';
-			loader.load( 'arrow-gray.png', callback );
+			loader.load( '../arrow-gray.png', callback );
 
 			function callback ( tex ){
 

@@ -29,7 +29,7 @@ Workshop related
 
 ### [EPW JSON Three.js]( #epw-json-threejs/README.md "get started reading EPW JSON" ) [&#x1F517;]( epw-json-threejs/index.html )
 
-### [EPW JSON Parser]( #epw-json-parser/README.md "A fun fail" ) [&#x1F517;]( epw-json-parser/epw-parser-r2.html )
+### [EPW JSON Parser]( #epw-json-parser/README.md "A fun fail" ) [&#x1F517;]( epw-json-parser/index.html )
 
 ### [EPW JSON 3D]( #epw-json-3d/README.md "Watch time fly" ) [&#x1F517;]( epw-json-3d/index.html )
 
