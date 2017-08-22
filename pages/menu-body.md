@@ -8,15 +8,13 @@
 
 ### [unofficial home page]( index.html )
 
-<!--
-#### [README / home page]( #README.md )
--->
+#### [README]( #README.md )
 
 ***
 
 Conference Related
 
-### [IBPSA 2017 Read Me]( #./pages/readme-ibpsa-2017.md )
+### [1st IBPSA2017 Read Me]( #./pages/readme-ibpsa-2017.md )
  
 ### [Sponsor links]( #./pages/menu-sponsor-links.md "View all 40 sites in a minute or two" )
 
