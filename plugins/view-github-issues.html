@@ -25,10 +25,11 @@
 
 		<div id = "header" ><h1><a id = "title" href = "" >ibpsa2017.github.io Read Me</a></h1></div>
 
-		<iframe id="ifrReadMe" src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px ></iframe>
+		<iframe id="ifrReadMe" class="iframeReadMe" src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px ></iframe>
 		<i>Script of the moment: <a href="https://ibpsa2017.github.io/epw-3d/index.html" >EPW 3D</a> showing downtown San Francisco with Hyatt Embarcadero at center. Click 'Play the Year' to view a year of EPW data</i>
 		<span style="display: none" >Not visible in GitHub source code view</span>
 
+		<p>ibpsa2017.github.io is an unofficial attendee site. We are in no way officially affiliated with IBPSA. See <a href="https://ibpsa2017.github.io/#./pages/about.md" >About</a> for details.</p>
 		<hr>
 
 		<div id = "contents" ></div>
@@ -91,9 +92,10 @@
 				issue = json[ i ];
 				contents.innerHTML += 
 
-					'<h1>' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
-					'<div><i>created: ' + issue.created_at + ' by ' + issue.user.login +  '</i></div>' +
+					'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
+					'<div><i>written on: ' + issue.created_at + ' by ' + issue.user.login +  '</i></div>' +
 					converter.makeHtml( issue.body ) +
+
 				'<hr>';
 
 			}
@@ -115,7 +117,9 @@
 
 		}
 
+
 	}
+
 
 
 </script>
