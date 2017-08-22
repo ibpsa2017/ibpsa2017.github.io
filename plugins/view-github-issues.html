@@ -27,7 +27,9 @@
 		<i>Script of the moment: <a href="https://ibpsa2017.github.io/epw-3d/index.html" >EPW 3D</a> showing downtown San Francisco with Hyatt Embarcadero at center. Click 'Play the Year' to view a year of EPW data</i>
 		<span style="display: none" >Not visible in GitHub source code view</span>
 
-		<p>ibpsa2017.github.io is an unofficial conference.attendee site. We are in no way officially affiliated with IBPSA. See <a href="https://ibpsa2017.github.io/#./pages/about.md" >About</a> for details.</p>
+		<p>ibpsa2017.github.io is an unofficial conference.attendee site. We are in no way officially affiliated with IBPSA. See <a href="https://ibpsa2017.github.io/#./pages/about.md" target=_top >About</a> for details.</p>
+
+
 		<hr>
 
 		<div id = "contents" ></div>
@@ -85,11 +87,20 @@
 			for ( var i = 0; i < json.length; i++ ) {
 
 				issue = json[ i ];
+
+
+
+				html = converter.makeHtml( issue.body );
+				html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
+console.log( '', html );
 				contents.innerHTML += 
 
-					'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
-					'<div><i>written on: ' + issue.created_at + ' by ' + issue.user.login +  '</i></div>' +
-					converter.makeHtml( issue.body ) +
+//					'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
+					'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' + 
+
+					'<div><i>written on: ' + issue.created_at + 
+					' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i></div>' +
+					html +
 
 				'<hr>';
 

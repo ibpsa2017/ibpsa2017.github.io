@@ -3,11 +3,13 @@
 
 # [ibpsa2017.github.io Read Me]( https://ibpsa2017.github.io ) 
 
+<!--
 <iframe class="iframeReadMe" src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px ></iframe>
 
 _Script of the moment: [EPW 3D]( https://ibpsa2017.github.io/epw-3d/index.html ) showing downtown San Francisco with Hyatt Embarcadero at center. Click 'Play the Year' to view a year of EPW data_
 
 <span style="display: none" >Iframe is visible in GitHub web page view only</span>
+-->
 
 You are at an online presence for things related to 
 
@@ -69,5 +71,5 @@ When this effort is complete, then further efforts are likely to continue somewh
 
 ### 2017-08-13 ~ Theo
 
-* This read me updated and reset to be the developer notes for the project not that the GitHub Pages wen site home page is set up as a blog
+* This read me updated and reset to be the developer notes for the project. Note that the GitHub Pages web site home page is set up as a blog using the GitHub issues as the host for posts.
 
