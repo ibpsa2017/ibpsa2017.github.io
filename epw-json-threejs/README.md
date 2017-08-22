@@ -4,7 +4,7 @@
 
 # [EPW JSON Three.js Read Me]( #README.md )
 
-<iframe src=https://ibpsa2017.github.io/epw-json-threejs/index.html width=100% height=600px /* onload=this.contentWindow.controls.enableZoom=false; */ ></iframe>
+<iframe src=https://ibpsa2017.github.io/epw-json-threejs/index.html width=100% height=600px ></iframe>
 
 ## Full Screen: [EPW JSON Three.js ]( https://ibpsa2017.github.io/epw-json-threejs/index.html )
 
