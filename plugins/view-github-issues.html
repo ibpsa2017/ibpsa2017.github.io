@@ -2,18 +2,16 @@
 <html lang = "en" >
 <head>
 <meta charset = "utf-8" >
-<meta name = description content = "Basic HTML template" >
+<meta name = description content = "GitHub issues to blog posts" >
 <meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = date content = "2017-08-04" >
-<title></title>
+<meta name = date content = "2017-08-21" >
+<title>View GitHub Issues</title>
 <style>
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
 	hr { margin-bottom: 80px; }
 	img { border: 2px red solid; max-width: 800px; }
-
-/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
 
 </style>
 </head>
@@ -29,7 +27,7 @@
 		<i>Script of the moment: <a href="https://ibpsa2017.github.io/epw-3d/index.html" >EPW 3D</a> showing downtown San Francisco with Hyatt Embarcadero at center. Click 'Play the Year' to view a year of EPW data</i>
 		<span style="display: none" >Not visible in GitHub source code view</span>
 
-		<p>ibpsa2017.github.io is an unofficial attendee site. We are in no way officially affiliated with IBPSA. See <a href="https://ibpsa2017.github.io/#./pages/about.md" >About</a> for details.</p>
+		<p>ibpsa2017.github.io is an unofficial conference.attendee site. We are in no way officially affiliated with IBPSA. See <a href="https://ibpsa2017.github.io/#./pages/about.md" >About</a> for details.</p>
 		<hr>
 
 		<div id = "contents" ></div>
@@ -78,12 +76,9 @@
 			let response, json, lines;
 
 			response = xhr.target.response;
-
 //console.log( 'response', response );
-//			contents.innerHTML = response;
 
 			json = JSON.parse( response );
-
 // console.log( '', json );
 
 
