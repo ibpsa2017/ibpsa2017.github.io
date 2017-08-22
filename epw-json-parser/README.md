@@ -5,9 +5,9 @@
 ====
 
 
-<iframe class=iframeReadMe src=https://ibpsa2017.github.io/epw-json-parser/epw-parser-r2.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=https://ibpsa2017.github.io/epw-json-parser/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [EPW Parser]( https://ibpsa2017.github.io/epw-parser/epw-parser-r2.html )
+## Full Screen: [EPW Parser]( https://ibpsa2017.github.io/epw-json-parser/index.html )
 
 ## Concept
 
