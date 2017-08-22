@@ -180,13 +180,13 @@ EnergyPlus created and maintain EnergyPlus Weather (EPW) files.
 
 ### [eco-envolventes]( http://www.eco-envolventes.net/ )
 
-eco-envolventes is a research project at the [Universidad de Piloto]( http://www.eco-envolventes.net/tools/ ), Bogota, Colombia
+[eco-envolventes]( http://www.eco-envolventes.net/ ) is a research project at the [Universidad de Piloto]( http://www.unipiloto.edu.co/ ), Bogota, Colombia
 
 The group prepared a submission for Workshop at the Design Modelling Symposium 16 - 17 September 2017 Paris 
 
 The submission includes a number of very interesting 2D and 3D visualizations.
 
-Of primary importance is their data set of EPW files converted to JSON
+Of primary importance is their data set of EPW files converted to JSON.
 
 Pages of great interest include:
 
@@ -203,7 +203,13 @@ Pages of great interest include:
 	* Folders with all converted files: http://www.eco-envolventes.net/data/json/allEPW/
 	* More visualizations: http://www.eco-envolventes.net/tools/
 
+
 ## Change Log
+
+
+### 2017-08-21 ~ Theo
+
+* Moany code and text updates
 
 ### 2017-08-12 ~ Theo
 
