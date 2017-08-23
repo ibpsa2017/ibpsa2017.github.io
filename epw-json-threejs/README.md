@@ -11,7 +11,7 @@
 
 ## Concept
 
-Trying to match the capabilities of [3D Weather Chart]( http://www.eco-envolventes.net/tools/170614a/3dChart1.html ) with simpler code and fewer dependencies.
+Trying to match the capabilities of [3D Weather Chart]( http://www.eco-envolventes.net/tools/170614a/3dChart1.html ) with simple code and few dependencies.
 
 Thank you for the climaJSON data: [eco-envolventes]( http://www.eco-envolventes.net/ ) - a research project at the [Universidad de Piloto]( http://www.unipiloto.edu.co/ ), Bogota, Colombia.
 
