@@ -14,6 +14,10 @@
 
 Simple user interface tool to help you select a location and gather its EPW data hosted remotely.
 
+
+Thank you for the climaJSON data: [eco-envolventes]( http://www.eco-envolventes.net/ ) - a research project at the [Universidad de Piloto]( http://www.unipiloto.edu.co/ ), Bogota, Colombia.
+
+
 ## Issue
 
 
