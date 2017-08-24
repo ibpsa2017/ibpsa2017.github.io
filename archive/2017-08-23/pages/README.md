@@ -3,13 +3,11 @@
 
 # [ibpsa2017.github.io Read Me]( https://ibpsa2017.github.io ) 
 
-<!--
 <iframe class="iframeReadMe" src=https://ibpsa2017.github.io/epw-3d/index.html width=100% height=600px ></iframe>
 
 _Script of the moment: [EPW 3D]( https://ibpsa2017.github.io/epw-3d/index.html ) showing downtown San Francisco with Hyatt Embarcadero at center. Click 'Play the Year' to view a year of EPW data_
 
 <span style="display: none" >Iframe is visible in GitHub web page view only</span>
--->
 
 You are at an online presence for things related to 
 
@@ -65,14 +63,6 @@ _2017-08-13 ~ the above list is still a work in progress_
 The current efforts are attempts by Theo Armour to complete the incomplete demos he showed during the workshop
 
 When this effort is complete, then further efforts are likely to continue somewhere on the Ladybug Tools GitHub organization
-
-
-
-## To Do
-
-* 2017-08-21 ~ Add blog post expanding on 'Introduction to Open Web Tools Miniworkshop'
-* 2017-08-21 ~ Add blog posts on EPW parsers
-* 2017-08-21 ~ Add links to ongoing efforts on Ladybug Tools
 
 
 ## Change Log

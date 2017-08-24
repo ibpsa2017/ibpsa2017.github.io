@@ -8,11 +8,6 @@
 
 ## Full Screen: [EPW JSON Three.js ]( https://ibpsa2017.github.io/epw-json-threejs/index.html )
 
- At first load, the script  displays a random country, city and measurement.
-
-<span style="display: none" >Iframe is visible in GitHub web page view only</span>
-
-
 
 ## Concept
 

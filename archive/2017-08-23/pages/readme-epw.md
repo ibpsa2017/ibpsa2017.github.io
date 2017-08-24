@@ -39,11 +39,11 @@ Now just click on this link:
 
 [Buenos Aires, Argentina EPW]( http://www.eco-envolventes.net/data/json/allEPW/ARG/ARG_BUENOS%20AIRES.json )
 
-Bingo, you have data! Courtesy of the nice peeps at Pilota University in Bogata, Columbia who have converted all the EPW files to JSON and made them available for directly opening in a web page.
+Bingo, you have data! Courtesy of the nice peeps at [eco-envolventes]( http://www.eco-envolventes.net/ ) - a research project at the [Universidad de Piloto]( http://www.unipiloto.edu.co/ ) in Bogata, Columbia - who have converted all the EPW files to JSON and made them available for directly opening in a web page.
 
-We need more nice peeps like this and we need the files on freely available places like Wiki Commons and GitHub. Anyway this is a start. I should note that organizations such as weatherunderground have made extensive data available. The issue is that you have to register, and abide by rate limits and there's a learning curve as well and etc. 
+We need more nice peeps like this and we need the files on freely available places like Wiki Commons and GitHub. Anyway this is a start. I should note that organizations such as [weatherunderground]( https://www.wunderground.com/ ) have made extensive data available. The issue is that you have to register, and abide by rate limits and there's a learning curve as well and etc. 
 
-But this freely/easily weather data thing is new - and much welcomed.
+But this 'freely/easily' weather data thing is new - and much welcomed.
 
 ### Now What
 

@@ -86,23 +86,18 @@
 
 	} );
 
+
 	init();
 
 
 	function init() {
 
 
-		if ( !parent.ifrContents ) {
-
-			alert( 'Please first display any location.');
-
-			return;
-
-		}
-
 		parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
 
+
 	}
+
 
 
 
@@ -110,20 +105,23 @@
 
 		const style = '"height:360px; margin: 100px 0 0 200px; width: 480px; position: absolute;"';
 
-		const url = !parent.ifrContents ? 'analemma3-3d.html' : parent.ifrContents.src;
+		const url = !parent.ifrMain ? 'analemma3-3d.html' : parent.ifrMain.src;
 
-//		parent.main.innerHTML = '<iframe id=ifrContents src=' + url + ' style= ' + style + ' ></iframe>';
+//		parent.main.innerHTML = '<iframe id=ifrMain src=' + url + ' style= ' + style + ' ></iframe>';
 
-		parent.ifrContents.style.cssText = 'left: 0; margin: 0 auto; width: 480px; height: 360px; position: absolute; right: 0; top: 100px;';
+		parent.ifrMain.style.cssText = 'left: 0; margin: 0 auto; width: 480px; height: 360px; position: absolute; right: 0; top: 100px;';
+
+
 
 console.log( 'capturer', capturer );
+
 
 	}
 
 
 	function updateScene() {
 
-		icw = parent.ifrContents.contentWindow;
+		icw = parent.ifrMain.contentWindow;
 
 console.log( '', icw );
 

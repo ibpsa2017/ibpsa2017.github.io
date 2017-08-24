@@ -67,17 +67,9 @@ The current efforts are attempts by Theo Armour to complete the incomplete demos
 When this effort is complete, then further efforts are likely to continue somewhere on the Ladybug Tools GitHub organization
 
 
-
-## To Do
-
-* 2017-08-21 ~ Add blog post expanding on 'Introduction to Open Web Tools Miniworkshop'
-* 2017-08-21 ~ Add blog posts on EPW parsers
-* 2017-08-21 ~ Add links to ongoing efforts on Ladybug Tools
-
-
 ## Change Log
 
 ### 2017-08-13 ~ Theo
 
-* This read me updated and reset to be the developer notes for the project not that the GitHub Pages wen site home page is set up as a blog
+* This read me updated and reset to be the developer notes for the project. Note that the GitHub Pages web site home page is set up as a blog using the GitHub issues as the host for posts.
 
