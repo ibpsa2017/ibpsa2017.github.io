@@ -38,7 +38,6 @@
 
 <script>
 
-
 	const b = '<br>';
 
 	init();
@@ -87,6 +86,8 @@
 			for ( var i = 0; i < json.length; i++ ) {
 
 				issue = json[ i ];
+
+
 
 				html = converter.makeHtml( issue.body );
 				html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
